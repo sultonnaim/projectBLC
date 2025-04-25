@@ -22,8 +22,9 @@
                         <!-- Dropdown Menu -->
                         <ul x-show="open" @click.away="open = false" x-transition class="absolute z-50 mt-2 w-48 bg-white border rounded-lg shadow-lg py-2 ">
                             <li><a href="/informasi/tentang" class="block px-4 py-2 hover:bg-orange-100">Tentang</a></li>
-                            <li><a href="/informasi/maklumat" class="block px-4 py-2 hover:bg-orange-100">Maklumat Pelayanan</a></li>
+                            <li><a href="/informasi/maklumat" class="block px-4 py-2 hover:bg-orange-100">Maklumat & Standar</a></li>
                             <li><a href="/informasi/pendaftaran" class="block px-4 py-2 hover:bg-orange-100">Pendaftaran</a></li>
+                            <li><a href="/informasi/pembelajaran" class="block px-4 py-2 hover:bg-orange-100">Pembelajaran</a></li>
                             <li><a href="/informasi/faq" class="block px-4 py-2 hover:bg-orange-100">FAQ</a></li>
                         </ul>
                     </li>
@@ -37,7 +38,7 @@
     <!-- Hero Section -->
     <div class="w-full h-64 bg-cover bg-center relative" style="background-image: url('{{ asset('images/pengunjung1.png') }}');">
         <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <h1 class="text-white text-3xl md:text-4xl font-bold text-center">Maklumat Pelayanan BLC Surabaya</h1>
+            <h1 class="text-white text-3xl md:text-4xl font-bold text-center">Maklumat Dan Standar <br> Broadband Learning Center Surabaya</h1>
         </div>
     </div>
 
@@ -55,7 +56,8 @@
                 <ul class="space-y-2">
                     <li><a href="{{ route('informasi.tentang') }}" class="text-orange-500 hover:underline">Tentang</a></li>
                     <li><a href="{{ route('informasi.pendaftaran') }}" class="text-orange-500 hover:underline">Pendaftaran</a></li>
-                    <li><a href="{{ route('informasi.maklumat') }}" class="text-orange-500 font-bold">Maklumat </a></li>
+                    <li><a href="{{ route('informasi.maklumat') }}" class="text-orange-500 font-bold">Maklumat & standar </a></li>
+                    <li><a href="{{ route('informasi.pembelajaran') }}" class="text-orange-500 hover:underline">Pembelajaran </a></li>
                     <li><a href="{{ route('informasi.faq') }}" class="text-orange-500 hover:underline">FAQ</a></li>
                 </ul>
             </div>

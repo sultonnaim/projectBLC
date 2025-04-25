@@ -15,6 +15,7 @@ Route::prefix('informasi')->group(function () {
     Route::view('/tentang', 'public.informasi.tentang')->name('informasi.tentang');
     Route::view('/maklumat', 'public.informasi.maklumat')->name('informasi.maklumat');
     Route::view('/pendaftaran', 'public.informasi.pendaftaran')->name('informasi.pendaftaran');
+    Route::view('/pembelajaran', 'public.informasi.pembelajaran')->name('informasi.pembelajaran');
     Route::view('/faq', 'public.informasi.faq')->name('informasi.faq');
 });
 
