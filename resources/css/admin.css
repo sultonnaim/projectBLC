@@ -1,0 +1,64 @@
+/* Animasi dropdown */
+[x-collapse] {
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+/* Rotasi ikon */
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+/* Highlight menu aktif */
+.sidebar-nav a.active {
+  @apply bg-blue-50 text-blue-600;
+}
+
+/* Transisi hover */
+.sidebar-nav a, .sidebar-nav button {
+  transition: all 0.2s ease;
+}
+
+/* dropdown tetap terlihat */
+[x-data] [x-show="open"] {
+    display: block !important;
+  }
+  
+  /* Animasi lebih smooth */
+  [x-collapse] {
+    transition: all 0.3s ease;
+    will-change: height;
+  }
+  
+  /* Style untuk menu aktif */
+  .sidebar-nav a.active {
+    @apply bg-orange-100 text-orange-800 font-medium;
+  }
+  
+  /* Style untuk parent menu aktif */
+  .sidebar-nav button.active-parent {
+    @apply bg-orange-50 text-orange-700;
+  }
+
+  /* Untuk sidebar collapsed */
+.w-20 .sidebar-item-text {
+    @apply hidden;
+  }
+  .w-20 .sidebar-icon {
+    @apply mx-auto;
+  }
+
+  .btn-pdf {
+    @apply bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center transition-colors;
+  }
+  .btn-pdf i {
+    @apply mr-2;
+  }
+  * Avatar Upload Effect */
+.avatar-upload:hover .avatar-overlay {
+    opacity: 1;
+}
+.avatar-overlay {
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}

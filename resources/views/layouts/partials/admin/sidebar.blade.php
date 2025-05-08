@@ -1,48 +1,149 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="#" class="brand-link">
-        <img src="{{ asset('/images/logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-1">
-        <span class="brand-text font-weight-bold">BLC Surabaya</span>
-    </a>
+<aside x-data="{ mobileSidebarOpen: false }" 
+      class="fixed inset-y-0 left-0 z-30 w-64 bg-white shadow-lg transform lg:translate-x-0 transition-transform duration-200 ease-in-out"
+      :class="{ '-translate-x-full': !mobileSidebarOpen }">
+  
+  <div class="flex items-center justify-between p-4 border-b">
+    <h1 class="text-xl font-bold text-gray-800">Broadband Learning Center</h1>
+    <button @click="mobileSidebarOpen = false" class="lg:hidden text-gray-500">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  
+  <!-- Menu Container: Scrollable -->
+  <div class="overflow-y-auto h-[calc(100vh-5rem)] px-2 py-4 scrollbar-thin scrollbar-thumb-orange-300 scrollbar-track-orange-100">
+    <nav class="p-4 space-y-1">
+      <!-- Dashboard -->
+      <a href="{{ route('admin.dashboardadmin') }}" 
+        class="flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-all
+                {{ request()->routeIs('admin.dashboardadmin') ? 
+                  'bg-orange-100 text-orange-600' : 
+                  'text-gray-800 hover:bg-orange-500' }}">
+        <i class="fas fa-tachometer-alt mr-3"></i>
+        <span>Dashboard</span>
+      </a>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <!-- Sidebar user panel  -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-                <img src="{{ asset('/images/Hero 1.png') }}" class="img-circle" alt="User Image">
-            </div>
-            {{-- <div class="info">
-                <a href="#" class="d-block">{{ Auth::user()->name }}</a>
-            </div> --}}
+        <!-- Menu Utama -->
+        <div x-data="{ open: false }" class="space-y-1">
+          <!-- Trigger Dropdown -->
+          <button @click="open = !open" class="w-full flex items-center justify-between px-4 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
+            <span class="flex items-center">
+              <i class="fas fa-users mr-3"></i>
+              Manajemen Peserta
+            </span>
+            <i class="fas fa-chevron-down text-xs transition-transform duration-200" :class="{ 'rotate-180': open }"></i>
+          </button>
+          
+          <!-- Submenu -->
+          <div x-show="open" x-collapse class="pl-8 space-y-1">
+            <a href="{{ route('admin.peserta.index') }}" 
+              class="block px-4 py-2 text-sm text-gray-600 rounded hover:bg-gray-50 {{ request()->routeIs('admin.peserta.index') ? 'bg-orange-100 text-orange-800' : '' }}">
+              <i class="fas fa-list mr-2"></i>
+              Daftar Peserta
+            </a>
+            <a href="{{ route('admin.peserta.create') }}" 
+              class="block px-4 py-2 text-sm text-gray-600 rounded hover:bg-gray-50 {{ request()->routeIs('admin.peserta.create') ? 'bg-orange-100 text-orange-800' : '' }}">
+              <i class="fas fa-plus-circle mr-2"></i>
+              Tambah Peserta
+            </a>
+          </div>
+        </div>
+    
+      <!-- Dropdown Menu: Kelas -->
+      <div x-data="{ open: {{ request()->routeIs('admin.kelas.*') ? 'true' : 'false' }} }" class="mt-2">
+        <button @click="open = !open" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg text-gray-800 hover:bg-orange-500 transition-colors">
+          <div class="flex items-center">
+            <i class="fas fa-chalkboard-teacher mr-3"></i>
+            <span>Manajemen Kelas</span>
+          </div>
+          <i class="fas fa-chevron-down text-xs transition-transform duration-200" :class="{'transform rotate-180': open}"></i>
+        </button>
+        <div x-show="open" x-collapse class="ml-4 mt-1 space-y-1">
+          <a href="{{ route('admin.peserta.index') }}" 
+            class="flex items-center px-4 py-2 text-sm rounded-lg transition-all
+                    {{ request()->routeIs('admin.peserta.index') ? 
+                      'bg-orange-100 text-orange-600' : 
+                      'text-gray-800 hover:bg-orange-400' }}">
+            <i class="fas fa-list mr-3"></i>
+            <span>Daftar Kelas</span>
+          </a>
         </div>
 
-        <!-- Sidebar Menu -->
-        <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <li class="nav-item">
-                    <a href="{{ route('admin.dashboardadmin') }}" class="nav-link active">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>Dashboard</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>Users</p>
-                    </a>
-                </li>
-                <!--  Logout  -->
-        <li class="nav-item">
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="nav-link text-danger" style="background: none; border: none; width: 100%; text-align: left;">
-                    <i class="nav-icon fas fa-sign-out-alt"></i>
-                    <p>Logout</p>
-                </button>
-            </form>
-        </li>
-            </ul>
-        </nav>
-    </div>
+      <!-- Dropdown Menu: Pelatihan -->
+      <div x-data="{ open: {{ request()->routeIs('admin.pelatihan.*') ? 'true' : 'false' }} }" class="mt-2">
+        <button @click="open = !open" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg text-gray-800 hover:bg-orange-500 transition-colors">
+          <div class="flex items-center">
+            <i class="fas fa-graduation-cap mr-3"></i>
+            <span>Pelatihan</span>
+          </div>
+          <i class="fas fa-chevron-down text-xs transition-transform duration-200" :class="{'transform rotate-180': open}"></i>
+        </button>
+        <div x-show="open" x-collapse class="ml-4 mt-1 space-y-1">
+          <a href="{{ route('admin.dashboardadmin') }}" 
+            class="flex items-center px-4 py-2 text-sm rounded-lg transition-all
+                    {{ request()->routeIs('admin.dashboardadmin') ? 
+                      'bg-orange-100 text-orange-600' : 
+                      'text-gray-800 hover:bg-orange-400' }}">
+            <i class="fas fa-plus-circle mr-3"></i>
+            <span>Entry Pelatihan</span>
+          </a>
+          <a href="{{ route('admin.dashboardadmin') }}" 
+            class="flex items-center px-4 py-2 text-sm rounded-lg transition-all
+                    {{ request()->routeIs('admin.dashboardadmin') ? 
+                      'bg-orange-100 text-orange-600' : 
+                      'text-gray-800 hover:bg-orange-400' }}">
+            <i class="fas fa-file-alt mr-3"></i>
+            <span>Laporan Pelatihan</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Dropdown Menu: Pengunjung -->
+      <div x-data="{ open: {{ request()->routeIs('admin.pengunjung.*') ? 'true' : 'false' }} }" class="mt-2">
+        <button @click="open = !open" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg text-gray-800 hover:bg-orange-500 transition-colors">
+          <div class="flex items-center">
+            <i class="fas fa-user-friends mr-3"></i>
+            <span>Pengunjung</span>
+          </div>
+          <i class="fas fa-chevron-down text-xs transition-transform duration-200" :class="{'transform rotate-180': open}"></i>
+        </button>
+        <div x-show="open" x-collapse class="ml-4 mt-1 space-y-1">
+          <a href="{{ route('admin.dashboardadmin') }}" 
+            class="flex items-center px-4 py-2 text-sm rounded-lg transition-all
+                    {{ request()->routeIs('admin.dashboardadmin') ? 
+                      'bg-orange-100 text-orange-600' : 
+                      'text-gray-800 hover:bg-orange-400' }}">
+            <i class="fas fa-list mr-3"></i>
+            <span>Daftar Pengunjung</span>
+          </a>
+          <a href="{{ route('admin.dashboardadmin') }}" 
+            class="flex items-center px-4 py-2 text-sm rounded-lg transition-all
+                    {{ request()->routeIs('admin.dashboardadmin') ? 
+                      'bg-orange-100 text-orange-600' : 
+                      'text-gray-800 hover:bg-orange-400' }}">
+            <i class="fas fa-chart-bar mr-3"></i>
+            <span>Laporan Kunjungan</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Dropdown Menu: Ujian -->
+      <div x-data="{ open: {{ request()->routeIs('admin.ujian.*') ? 'true' : 'false' }} }" class="mt-2">
+        <button @click="open = !open" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg text-gray-800 hover:bg-orange-500 transition-colors">
+          <div class="flex items-center">
+            <i class="fas fa-clipboard-check mr-3"></i>
+            <span>Ujian</span>
+          </div>
+          <i class="fas fa-chevron-down text-xs transition-transform duration-200" :class="{'transform rotate-180': open}"></i>
+        </button>
+        <div x-show="open" x-collapse class="ml-4 mt-1 space-y-1">
+          <a href="{{ route('admin.dashboardadmin') }}" 
+            class="flex items-center px-4 py-2 text-sm rounded-lg transition-all
+                    {{ request()->routeIs('admin.dashboardadmin') ? 
+                      'bg-orange-100 text-orange-600' : 
+                      'text-gray-800 hover:bg-orange-400' }}">
+            <i class="fas fa-clipboard-list mr-3"></i>
+            <span>Master Ujian</span>
+          </a>
+        </div>
+      </div>
 </aside>
