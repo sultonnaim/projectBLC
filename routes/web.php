@@ -4,7 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\UserDashboardController;
 use App\Http\Controllers\BukuTamuController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\KelasController;
+use App\Http\Controllers\Admin\KelasController;
+use App\Http\Controllers\Admin\PengunjungController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -51,11 +52,17 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
         Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.index');
         Route::get('/kelas/cetak-pdf', [KelasController::class, 'cetakPdf'])->name('kelas.cetak-pdf');
     });  
+
+    Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/pengunjung', [PengunjungController::class, 'index'])->name('pengunjung.index');
+    Route::delete('/pengunjung/{pengunjung}', [PengunjungController::class, 'destroy'])->name('pengunjung.destroy');
+});
     
     Route::get('/profile', function () {
         return view('admin.profile');
     })->name('profile');
 });
+
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/superadmin', function () {

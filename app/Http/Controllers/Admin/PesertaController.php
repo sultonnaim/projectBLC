@@ -32,7 +32,7 @@ class PesertaController extends Controller
 
     public function create()
     {
-        return view('admin.peserta.create'); // nanti kita buat halaman tambah
+        return view('admin.peserta.create');
     }
 
     public function store(Request $request)
@@ -49,7 +49,7 @@ class PesertaController extends Controller
             'nik' => $request->nik,
             'lokasi_blc' => $request->lokasi_blc,
             'jenis_kelamin' => $request->jenis_kelamin,
-            'status' => 'belum', // default belum tervalidasi
+            'status' => 'belum', 
         ]);
 
         return redirect()->route('admin.peserta.index')->with('success', 'Peserta berhasil ditambahkan!');

@@ -1,7 +1,7 @@
 <header class="bg-white shadow-sm z-20">
   <div class="flex items-center justify-between px-6 py-4">
     <div class="flex items-center">
-      <!-- Hamburger Button - Selalu tampil kecuali di desktop lebar -->
+      <!-- Hamburger Button-->
       <button @click="mobileSidebarOpen = !mobileSidebarOpen" 
               class="xl:hidden mr-4 text-gray-500 hover:text-gray-700 focus:outline-none">
         <i class="fas fa-bars text-lg"></i>
@@ -12,7 +12,7 @@
         @hasSection('page-title')
           @yield('page-title')
         @else
-          Dashboard
+          
         @endif
       </h2>
     </div>

@@ -3,6 +3,7 @@
       :class="{ '-translate-x-full': !mobileSidebarOpen }">
   
   <div class="flex items-center justify-between p-4 border-b">
+    <img src="/images/logo.png" alt="Logo Blc" class="h-10 w-auto">
     <h1 class="text-xl font-bold text-gray-800">Broadband Learning Center</h1>
     <button @click="mobileSidebarOpen = false" class="lg:hidden text-gray-500">
       <i class="fas fa-times"></i>
@@ -28,7 +29,7 @@
           <button @click="open = !open" class="w-full flex items-center justify-between px-4 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
             <span class="flex items-center">
               <i class="fas fa-users mr-3"></i>
-              Manajemen Peserta
+              Peserta
             </span>
             <i class="fas fa-chevron-down text-xs transition-transform duration-200" :class="{ 'rotate-180': open }"></i>
           </button>
@@ -53,14 +54,14 @@
         <button @click="open = !open" class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg text-gray-800 hover:bg-orange-500 transition-colors">
           <div class="flex items-center">
             <i class="fas fa-chalkboard-teacher mr-3"></i>
-            <span>Manajemen Kelas</span>
+            <span>Kelas</span>
           </div>
           <i class="fas fa-chevron-down text-xs transition-transform duration-200" :class="{'transform rotate-180': open}"></i>
         </button>
         <div x-show="open" x-collapse class="ml-4 mt-1 space-y-1">
-          <a href="{{ route('admin.peserta.index') }}" 
+          <a href="{{ route('admin.dashboardadmin') }}" 
             class="flex items-center px-4 py-2 text-sm rounded-lg transition-all
-                    {{ request()->routeIs('admin.peserta.index') ? 
+                    {{ request()->routeIs('admin.dashboardadmin') ? 
                       'bg-orange-100 text-orange-600' : 
                       'text-gray-800 hover:bg-orange-400' }}">
             <i class="fas fa-list mr-3"></i>
@@ -109,7 +110,7 @@
         <div x-show="open" x-collapse class="ml-4 mt-1 space-y-1">
           <a href="{{ route('admin.dashboardadmin') }}" 
             class="flex items-center px-4 py-2 text-sm rounded-lg transition-all
-                    {{ request()->routeIs('admin.dashboardadmin') ? 
+                    {{ request()->routeIs('admin.pengunjung.index') ? 
                       'bg-orange-100 text-orange-600' : 
                       'text-gray-800 hover:bg-orange-400' }}">
             <i class="fas fa-list mr-3"></i>

@@ -14,13 +14,13 @@ class CreatePesertaTable extends Migration
     public function up()
     {
         Schema::create('peserta', function (Blueprint $table) {
-            $table->id(); // BIGINT UNSIGNED AUTO_INCREMENT sebagai ID
-            $table->string('nama', 255); // kolom nama
-            $table->string('nik', 16); // kolom nik
-            $table->string('lokasi_blc', 255); // kolom lokasi_blc
-            $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']); // kolom jenis_kelamin dengan enum
-            $table->enum('status', ['tervalidasi', 'belum'])->default('belum'); // kolom status dengan enum, default 'belum'
-            $table->timestamps(); // kolom created_at dan updated_at secara otomatis
+            $table->id(); 
+            $table->string('nama', 255);
+            $table->string('nik', 16); 
+            $table->string('lokasi_blc', 255); 
+            $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
+            $table->enum('status', ['tervalidasi', 'belum'])->default('belum'); 
+            $table->timestamps(); 
         });
     }
 
@@ -31,6 +31,6 @@ class CreatePesertaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('peserta'); // Hapus tabel peserta jika rollback
+        Schema::dropIfExists('peserta'); 
     }
 }
