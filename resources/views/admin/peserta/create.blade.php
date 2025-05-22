@@ -1,68 +1,102 @@
 @extends('layouts.admin')
+
+@section('title', 'Tambah Peserta Baru')
 @section('content')
-<div class="max-w-3xl mx-auto mt-10 bg-white p-6 rounded shadow">
-    <h2 class="text-2xl font-bold mb-6">Form Pendaftaran Peserta</h2>
-
-    <form action="{{ route('admin.peserta.index') }}" method="POST">
-        @csrf
-
-        <div class="mb-4">
-            <label for="nama_lengkap" class="block font-semibold">Nama Lengkap</label>
-            <input type="text" name="nama_lengkap" id="nama_lengkap" class="w-full border rounded px-3 py-2" required>
-        </div>
-
-        <div class="mb-4">
-            <label class="block font-semibold">Jenis Kelamin</label>
-            <label><input type="radio" name="jenis_kelamin" value="Laki-laki" required> Laki-laki</label>
-            <label class="ml-4"><input type="radio" name="jenis_kelamin" value="Perempuan"> Perempuan</label>
-        </div>
-
-        <div class="mb-4">
-            <label for="tempat_lahir" class="block font-semibold">Tempat Lahir</label>
-            <input type="text" name="tempat_lahir" id="tempat_lahir" class="w-full border rounded px-3 py-2" required>
-        </div>
-
-        <div class="mb-4">
-            <label for="tanggal_lahir" class="block font-semibold">Tanggal Lahir</label>
-            <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="w-full border rounded px-3 py-2" required>
-        </div>
-
-        <div class="mb-4">
-            <label for="no_hp" class="block font-semibold">No. HP</label>
-            <input type="text" name="no_hp" id="no_hp" class="w-full border rounded px-3 py-2" required>
-        </div>
-
-        <div class="mb-4">
-            <label for="email" class="block font-semibold">Email</label>
-            <input type="email" name="email" id="email" class="w-full border rounded px-3 py-2">
-        </div>
-
-        <div class="mb-4">
-            <label for="alamat" class="block font-semibold">Alamat</label>
-            <textarea name="alamat" id="alamat" class="w-full border rounded px-3 py-2" rows="3" required></textarea>
-        </div>
-
-        <div class="mb-4">
-            <label for="pendidikan" class="block font-semibold">Pendidikan</label>
-            <input type="text" name="pendidikan" id="pendidikan" class="w-full border rounded px-3 py-2" required>
-        </div>
-
-        <div class="mb-4">
-            <label for="pekerjaan" class="block font-semibold">Pekerjaan</label>
-            <input type="text" name="pekerjaan" id="pekerjaan" class="w-full border rounded px-3 py-2" required>
-        </div>
-
-        <div class="mb-4">
-            <label for="status" class="block font-semibold">Status</label>
-            <select name="status" id="status" class="w-full border rounded px-3 py-2">
-                <option value="Aktif" selected>Aktif</option>
-                <option value="Tidak Aktif">Tidak Aktif</option>
-            </select>
-        </div>
-
-        <div class="text-right">
-            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Simpan</button>
-        </div>
-    </form>
+<div class="container mx-auto px-4 py-8">
+    <div class="bg-white rounded-lg shadow-md p-6">
+        <h1 class="text-2xl font-bold mb-6">Tambah Peserta Baru</h1>
+        
+        <form action="{{ route('admin.peserta.store') }}" method="POST">
+            @csrf
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Kolom Kiri -->
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap*</label>
+                        <input type="text" name="nama" required 
+                               class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                               value="{{ old('nama') }}"
+                               placeholder="Masukkan nama lengkap">
+                        @error('nama')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">NIK*</label>
+                        <input type="text" name="nik" required 
+                               class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                               value="{{ old('nik') }}"
+                               placeholder="Masukkan NIK">
+                        @error('nik')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Lokasi BLC*</label>
+                        <select name="lokasi_blc" required 
+                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <option value="">Pilih Lokasi BLC</option>
+                            <option value="BLC Surabaya" {{ old('lokasi_blc') == 'BLC Surabaya' ? 'selected' : '' }}>BLC Surabaya</option>
+                            <option value="BLC Barat" {{ old('lokasi_blc') == 'BLC Barat' ? 'selected' : '' }}>BLC Barat</option>
+                            <option value="BLC Timur" {{ old('lokasi_blc') == 'BLC Timur' ? 'selected' : '' }}>BLC Timur</option>
+                        </select>
+                        @error('lokasi_blc')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+                
+                <!-- Kolom Kanan -->
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Jenis Kelamin*</label>
+                        <div class="flex space-x-4">
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="jenis_kelamin" value="L" 
+                                    {{ old('jenis_kelamin') == 'L' ? 'checked' : '' }} required
+                                    class="text-blue-500 focus:ring-blue-500">
+                                <span class="ml-2">Laki-laki</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="jenis_kelamin" value="P"
+                                    {{ old('jenis_kelamin') == 'P' ? 'checked' : '' }}
+                                    class="text-blue-500 focus:ring-blue-500">
+                                <span class="ml-2">Perempuan</span>
+                            </label>
+                        </div>
+                        @error('jenis_kelamin')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Status Validasi</label>
+                        <select name="status" 
+                                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
+                            <option value="">Belum Validasi</option>
+                            <option value="tervalidasi" {{ old('status') == 'tervalidasi' ? 'selected' : '' }}>Tervalidasi</option>
+                        </select>
+                        @error('status')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 flex justify-end space-x-4">
+                <a href="{{ route('admin.peserta.index') }}" 
+                class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400">
+                    Batal
+                </a>
+                <button type="submit" 
+                        class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                    Simpan Data
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
 @endsection

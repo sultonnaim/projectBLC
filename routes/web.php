@@ -8,11 +8,10 @@ use App\Http\Controllers\Admin\KelasController;
 use App\Http\Controllers\Admin\PengunjungController;
 use Illuminate\Support\Facades\Route;
 
-
-// Halaman Utama
+// Halaman Publik (Tanpa Auth)
 Route::view('/', 'public.home')->name('home');
 
-// Informasi
+// Informasi Publik
 Route::prefix('informasi')->group(function () {
     Route::view('/tentang', 'public.informasi.tentang')->name('informasi.tentang');
     Route::view('/maklumat', 'public.informasi.maklumat')->name('informasi.maklumat');
@@ -21,58 +20,57 @@ Route::prefix('informasi')->group(function () {
     Route::view('/faq', 'public.informasi.faq')->name('informasi.faq');
 });
 
-// Halaman Lain
+// Halaman Lain Publik
 Route::view('/artikel', 'public.artikel')->name('artikel');
 Route::view('/lokasi', 'public.lokasi')->name('lokasi');
 
-Route::get('/buku', function () {
-    return view('public.buku');
-});
-Route::post('/buku', [BukuTamuController::class, 'store'])->name('bukutamu.store');
-
+// Area Terproteksi (Harus Login)
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/buku', function () {
         return view('public.buku');
-    })->name('user.dashboard');
-});
+    })->name('buku');
 
-Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', function () {
+    Route::get('/buku', [BukuTamuController::class, 'create'])->name('bukutamu.create');
+    Route::post('/buku', [BukuTamuController::class, 'store'])->name('bukutamu.store');
+
+
+    Route::get('/admin', function () {
         return view('admin.dashboardadmin');
-    })->name('dashboardadmin');
-
-    // Route resource untuk peserta
-    Route::resource('peserta', App\Http\Controllers\Admin\PesertaController::class);
-
-    // Route tambahan untuk validasi / nonvalidasi peserta
-    Route::get('peserta/{id}/validasi', [App\Http\Controllers\Admin\PesertaController::class, 'validasi'])->name('peserta.validasi');
-    Route::get('peserta/{id}/nonvalidasi', [App\Http\Controllers\Admin\PesertaController::class, 'nonvalidasi'])->name('peserta.nonvalidasi');
-
+    })->name('user.dashboard');
+    
+    // Admin Area
     Route::prefix('admin')->name('admin.')->group(function () {
+        Route::get('/admin', function () {
+            return view('admin.dashboardadmin');
+        })->name('dashboardadmin');
+        
+        Route::resource('peserta', App\Http\Controllers\Admin\PesertaController::class);
+
+        Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar');
+
+        Route::get('peserta/{id}/validasi', [App\Http\Controllers\Admin\PesertaController::class, 'validasi'])->name('peserta.validasi');
+        Route::get('peserta/{id}/nonvalidasi', [App\Http\Controllers\Admin\PesertaController::class, 'nonvalidasi'])->name('peserta.nonvalidasi');
+
         Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.index');
         Route::get('/kelas/cetak-pdf', [KelasController::class, 'cetakPdf'])->name('kelas.cetak-pdf');
-    });  
 
-    Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/pengunjung', [PengunjungController::class, 'index'])->name('pengunjung.index');
-    Route::delete('/pengunjung/{pengunjung}', [PengunjungController::class, 'destroy'])->name('pengunjung.destroy');
-});
+        Route::get('/pengunjung', [PengunjungController::class, 'index'])->name('pengunjung.index');
+        Route::delete('/pengunjung/{pengunjung}', [PengunjungController::class, 'destroy'])->name('pengunjung.destroy');
+        Route::post('/pengunjung', [PengunjungController::class, 'store'])->name('pengunjung.store');
+        Route::get('/pengunjung/entrypengunjung', [PengunjungController::class, 'create'])->name('pengunjung.entrypengunjung');
+
+
+        Route::get('/profile', function () {
+            return view('admin.profile.profile');
+        })->name('profile');
+    });
     
-    Route::get('/profile', function () {
-        return view('admin.profile');
-    })->name('profile');
+    // Super Admin Area
+    Route::prefix('superadmin')->name('superadmin.')->group(function () {
+        Route::get('/dashboard', function () {
+            return view('superadmin.dashboard');
+        })->name('dashboard');
+    });
 });
 
-
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/superadmin', function () {
-        return view('superadmin.dashboard');
-    })->name('superadmin.dashboard');
-});
-
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
-    ->middleware('
-    auth')
-    ->name('logout');
-
-require __DIR__.'/auth.php'; 
+require __DIR__.'/auth.php';

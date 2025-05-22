@@ -62,3 +62,17 @@
     transition: opacity 0.3s ease;
     opacity: 0;
 }
+/* Avatar Upload Effect */
+.avatar-upload:hover .avatar-overlay {
+    opacity: 1;
+}
+.avatar-overlay {
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+
+/* Form Input Focus */
+input:focus, textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}

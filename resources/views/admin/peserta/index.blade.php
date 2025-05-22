@@ -1,107 +1,135 @@
 @extends('layouts.admin')
 
-@section('page-title', 'Daftar Peserta')
+@section('title', 'Daftar Peserta')
 @section('content')
-<div class="content-header">
-  <div class="container-fluid">
-    <div class="flex flex-col md:flex-row justify-between items-center mb-4">
-      <h1 class="text-2xl font-bold text-gray-800">Daftar Peserta</h1>
-
-      <!-- Tombol Tambah Peserta -->
-      <a href="{{ route('admin.peserta.create') }}" class="btn btn-primary mt-2 md:mt-0">
-        <i class="fas fa-plus"></i> Tambah Peserta
-      </a>
-    </div>
-
-    <!-- Filter dan Search -->
-    <div class="flex flex-col md:flex-row md:items-center gap-4 mb-4">
-      <!-- Dropdown Pilih Area -->
-      <div class="w-full md:w-1/3">
-        <select name="area" id="area" class="form-control">
-          <option value="">Pilih Area BLC</option>
-          <option value="BLC Surabaya">BLC Surabaya</option>
-          <option value="BLC Barat">BLC Barat</option>
-          <option value="BLC Timur">BLC Timur</option>
-          <!-- Tambah area lain sesuai kebutuhan -->
-        </select>
-      </div>
-
-      <!-- Search Bar -->
-      <div class="w-full md:w-1/3">
-        <input type="text" name="search" id="search" class="form-control" placeholder="Cari peserta...">
-      </div>
-    </div>
-
-    <!-- Table Peserta -->
-    <div class="card">
-      <div class="card-body p-0">
-        <div class="table-responsive">
-          <table class="table table-hover table-striped mb-0">
-            <thead class="thead-light">
-              <tr>
-                <th>Nama</th>
-                <th>NIK</th>
-                <th>Lokasi BLC</th>
-                <th>Jenis Kelamin</th>
-                <th>Status</th>
-                <th>Aksi</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Loop data peserta di sini -->
-              @forelse ($peserta as $item)
-              <tr>
-                <td>{{ $item->nama }}</td>
-                <td>{{ $item->nik }}</td>
-                <td>{{ $item->lokasi_blc }}</td>
-                <td>{{ $item->jenis_kelamin }}</td>
-                <td>
-                  @if ($item->status == 'tervalidasi')
-                    <span class="badge badge-success">Tervalidasi</span>
-                  @else
-                    <span class="badge badge-warning">Belum Validasi</span>
-                  @endif
-                </td>
-                <td>
-                  <!-- Tombol Aksi -->
-                  <div class="btn-group">
-                    <a href="{{ route('admin.peserta.edit', $item->id) }}" class="btn btn-sm btn-warning">
-                      <i class="fas fa-edit"></i> Ubah
-                    </a>
-                    <form action="{{ route('admin.peserta.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Yakin mau hapus?')">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="btn btn-sm btn-danger">
-                        <i class="fas fa-trash"></i> Hapus
-                      </button>
-                    </form>
-                    @if ($item->status == 'tervalidasi')
-                      <a href="{{ route('admin.peserta.nonvalidasi', $item->id) }}" class="btn btn-sm btn-secondary">
-                        <i class="fas fa-times-circle"></i> Nonvalidasi
-                      </a>
-                    @else
-                      <a href="{{ route('admin.peserta.validasi', $item->id) }}" class="btn btn-sm btn-success">
-                        <i class="fas fa-check-circle"></i> Validasi
-                      </a>
-                    @endif
-                  </div>
-                </td>
-              </tr>
-              @empty
-              <tr>
-                <td colspan="6" class="text-center">Belum ada data peserta.</td>
-              </tr>
-              @endforelse
-            </tbody>
-          </table>
+<div class="container mx-auto px-4 py-8">
+    <!-- Header dan Search Bar -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+        <div>
+            <h1 class="text-2xl font-bold text-gray-800">Daftar Peserta</h1>
+            <p class="text-gray-600">Data peserta BLC Surabaya</p>
         </div>
-      </div>
-
-      <!-- Pagination -->
-      <div class="card-footer clearfix">
-        {{ $peserta->links() }}
-      </div>
+        
+        <div class="flex items-center gap-3">
+            <a href="{{ route('admin.peserta.create') }}" 
+            class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg flex items-center">
+                <i class="fas fa-plus mr-2"></i> Tambah Peserta
+            </a>
+        </div>
     </div>
-  </div>
+
+    <!-- Filter Section -->
+    <div class="bg-white p-4 rounded-lg shadow-md mb-6">
+        <form method="GET" class="flex flex-col md:flex-row gap-4">
+            <!-- Search by Name -->
+            <div class="flex-1">
+                <input type="text" name="search" placeholder="Cari nama peserta..." 
+                    value="{{ request('search') }}"
+                    class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
+            </div>
+            
+            <!-- Location Filter -->
+            <div class="flex-1">
+                <select name="lokasi_blc" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
+                    <option value="">Semua Lokasi</option>
+                    <option value="BLC Surabaya" {{ request('lokasi_blc') == 'BLC Surabaya' ? 'selected' : '' }}>BLC Surabaya</option>
+                    <option value="BLC Barat" {{ request('lokasi_blc') == 'BLC Barat' ? 'selected' : '' }}>BLC Barat</option>
+                    <option value="BLC Timur" {{ request('lokasi_blc') == 'BLC Timur' ? 'selected' : '' }}>BLC Timur</option>
+                </select>
+            </div>
+            
+            <!-- Status Filter -->
+            <div class="flex-1">
+                <select name="status" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
+                    <option value="">Semua Status</option>
+                    <option value="tervalidasi" {{ request('status') == 'tervalidasi' ? 'selected' : '' }}>Tervalidasi</option>
+                    <option value="belum" {{ request('status') == 'belum' ? 'selected' : '' }}>Belum Validasi</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
+                Filter
+            </button>
+            <a href="{{ route('admin.peserta.index') }}"
+              class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg">
+                Reset
+            </a>
+        </form>
+    </div>
+
+    <!-- Tabel Peserta -->
+    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
+                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
+                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">NIK</th>
+                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Lokasi BLC</th>
+                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenis Kelamin</th>
+                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @foreach($peserta as $key => $item)
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-3 whitespace-nowrap">{{ $peserta->firstItem() + $key }}</td>
+                        <td class="px-4 py-3 whitespace-nowrap">{{ $item->nama }}</td>
+                        <td class="px-4 py-3 whitespace-nowrap">{{ $item->nik }}</td>
+                        <td class="px-4 py-3 whitespace-nowrap">{{ $item->lokasi_blc }}</td>
+                        <td class="px-4 py-3 whitespace-nowrap">
+                            {{ $item->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            @if($item->status == 'tervalidasi')
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">
+                                    Tervalidasi
+                                </span>
+                            @else
+                                <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">
+                                    Belum Validasi
+                                </span>
+                            @endif
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex space-x-2">
+                                <a href="{{ route('admin.peserta.edit', $item->id) }}" 
+                                  class="text-blue-600 hover:text-blue-900">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <form action="{{ route('admin.peserta.destroy', $item->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" onclick="return confirm('Hapus data ini?')" 
+                                            class="text-red-600 hover:text-red-900">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                                @if($item->status == 'tervalidasi')
+                                    <a href="{{ route('admin.peserta.nonvalidasi', $item->id) }}" 
+                                      class="text-gray-600 hover:text-gray-900">
+                                        <i class="fas fa-times-circle"></i>
+                                    </a>
+                                @else
+                                    <a href="{{ route('admin.peserta.validasi', $item->id) }}" 
+                                      class="text-green-600 hover:text-green-900">
+                                        <i class="fas fa-check-circle"></i>
+                                    </a>
+                                @endif
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Pagination -->
+        <div class="bg-gray-50 px-6 py-3">
+            {{ $peserta->appends(request()->query())->links() }}
+        </div>
+    </div>
 </div>
 @endsection

@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pengunjungs', function (Blueprint $table) {
+        Schema::create('pengunjung', function (Blueprint $table) {
     $table->id();
-    $table->string('nama');
-    $table->date('tgl_lahir');
+    $table->date('tanggal');
     $table->string('sesi');
+    $table->string('nama_lengkap');
     $table->text('alamat');
+    $table->enum('jenis_kelamin', ['L', 'P']);
+    $table->date('tanggal_lahir');
+    $table->enum('kategori', ['SD', 'SMP', 'SMA', 'Umum']);
     $table->timestamps();
 });
     }

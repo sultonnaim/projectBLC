@@ -57,4 +57,27 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    /**
+     * Handle avatar upload
+     */
+    public function updateAvatar(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'avatar' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+
+        $user = $request->user();
+        
+        // Hapus avatar lama jika ada
+        if ($user->avatar) {
+            Storage::delete('public/'.$user->avatar);
+        }
+
+        // Simpan avatar baru
+        $path = $request->file('avatar')->store('avatars', 'public');
+        $user->update(['avatar' => $path]);
+
+        return back()->with('status', 'avatar-updated');
+    }
 }

@@ -20,14 +20,14 @@
         @foreach($dataKelas as $hari => $kelas)
         <div class="border-b last:border-b-0">
             <!-- Header Hari -->
-            <div class="bg-gray-50 px-6 py-4">
+            <div class="bg-gray-50 px-3 py-">
                 <h2 class="text-lg font-semibold text-gray-800">{{ $hari }}</h2>
             </div>
             
             <!-- Daftar Kelas per Hari -->
             <div class="divide-y divide-gray-200">
                 @foreach($kelas as $item)
-                <div class="px-6 py-4 hover:bg-gray-50 transition-colors">
+                <div class="px-3 py-2 hover:bg-gray-50 transition-colors">
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between">
                         <div class="mb-2 md:mb-0">
                             <div class="flex items-center">
