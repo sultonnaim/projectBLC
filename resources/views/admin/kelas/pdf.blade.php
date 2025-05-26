@@ -27,7 +27,6 @@
         <tr>
             <td width="25%">{{ $item['sesi'] }}</td>
             <td width="30%">{{ $item['nama_kelas'] }}</td>
-            <td width="20%">{{ $item['mentor'] }}</td>
             <td width="25%">{{ $item['waktu'] }} ({{ $item['ruangan'] }})</td>
         </tr>
         @endforeach

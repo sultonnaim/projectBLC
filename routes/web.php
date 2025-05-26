@@ -6,6 +6,7 @@ use App\Http\Controllers\BukuTamuController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\KelasController;
 use App\Http\Controllers\Admin\PengunjungController;
+use App\Http\Controllers\Admin\PelatihanController;
 use Illuminate\Support\Facades\Route;
 
 // Halaman Publik (Tanpa Auth)
@@ -33,14 +34,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/buku', [BukuTamuController::class, 'create'])->name('bukutamu.create');
     Route::post('/buku', [BukuTamuController::class, 'store'])->name('bukutamu.store');
 
-
-    Route::get('/admin', function () {
-        return view('admin.dashboardadmin');
-    })->name('user.dashboard');
-    
     // Admin Area
     Route::prefix('admin')->name('admin.')->group(function () {
-        Route::get('/admin', function () {
+        Route::get('/', function () {
             return view('admin.dashboardadmin');
         })->name('dashboardadmin');
         
@@ -59,7 +55,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/pengunjung', [PengunjungController::class, 'store'])->name('pengunjung.store');
         Route::get('/pengunjung/entrypengunjung', [PengunjungController::class, 'create'])->name('pengunjung.entrypengunjung');
 
-
+        Route::get('/pelatihan', [PelatihanController::class, 'index'])->name('pelatihan.index');
+        Route::post('/pelatihan', [PelatihanController::class, 'updatePelatihan'])->name('pelatihan.update');
+        
+    //     Route::prefix('pelatihan')->name('pelatihan.')->group(function() {
+    //     Route::get('/', [PelatihanController::class, 'index'])->name('index');
+    //     Route::post('/', [PelatihanController::class, 'updatePelatihan'])->name('update');
+    // });
         Route::get('/profile', function () {
             return view('admin.profile.profile');
         })->name('profile');

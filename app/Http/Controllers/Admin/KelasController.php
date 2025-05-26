@@ -14,171 +14,94 @@ class KelasController extends Controller
                 [
                     'sesi' => 'Sesi 1-2', 
                     'nama_kelas' => 'Fun Programming',
-                    'mentor' => 'Arif',
                     'waktu' => '09:00-11:00',
                     'ruangan' => 'Lab Komputer 1'
                 ],
                 [
                     'sesi' => 'Sesi 3-4',
                     'nama_kelas' => 'Web Design',
-                    'mentor' => 'Budi',
                     'waktu' => '13:00-15:00',
                     'ruangan' => 'Lab Multimedia'
                 ]
             ],
-            'selasa' => [
+            'Selasa' => [
                 [
                     'sesi' => 'Sesi 1-2', 
                     'nama_kelas' => 'Fun Programming',
-                    'mentor' => 'Arif',
                     'waktu' => '09:00-11:00',
                     'ruangan' => 'Lab Komputer 1'
                 ],
                 [
                     'sesi' => 'Sesi 3-4',
                     'nama_kelas' => 'Web Design',
-                    'mentor' => 'Budi',
                     'waktu' => '13:00-15:00',
                     'ruangan' => 'Lab Multimedia'
                 ]
             ],
-            'rabu' => [
+            'Rabu' => [
                 [
                     'sesi' => 'Sesi 1-2', 
                     'nama_kelas' => 'Fun Programming',
-                    'mentor' => 'Arif',
                     'waktu' => '09:00-11:00',
                     'ruangan' => 'Lab Komputer 1'
                 ],
                 [
                     'sesi' => 'Sesi 3-4',
                     'nama_kelas' => 'Web Design',
-                    'mentor' => 'Budi',
                     'waktu' => '13:00-15:00',
                     'ruangan' => 'Lab Multimedia'
                 ]
             ],
-            'kamis' => [
+            'Kamis' => [
                 [
                     'sesi' => 'Sesi 1-2', 
                     'nama_kelas' => 'Fun Programming',
-                    'mentor' => 'Arif',
                     'waktu' => '09:00-11:00',
                     'ruangan' => 'Lab Komputer 1'
                 ],
                 [
                     'sesi' => 'Sesi 3-4',
                     'nama_kelas' => 'Web Design',
-                    'mentor' => 'Budi',
                     'waktu' => '13:00-15:00',
                     'ruangan' => 'Lab Multimedia'
                 ]
             ],
-            'jumat' => [
+            'Jumat' => [
                 [
                     'sesi' => 'Sesi 1-2', 
                     'nama_kelas' => 'Fun Programming',
-                    'mentor' => 'Arif',
                     'waktu' => '09:00-11:00',
                     'ruangan' => 'Lab Komputer 1'
                 ],
                 [
                     'sesi' => 'Sesi 3-4',
                     'nama_kelas' => 'Web Design',
-                    'mentor' => 'Budi',
                     'waktu' => '13:00-15:00',
                     'ruangan' => 'Lab Multimedia'
                 ]
-            ],// Hari lainnya dengan struktur yang sama...
+            ],
         ];
 
-        return view('admin.kelas.index', compact('dataKelas'));
+        // Membuat array flat untuk daftar semua kelas
+        $allKelas = [];
+        foreach ($dataKelas as $hari => $kelasHari) {
+            foreach ($kelasHari as $kelas) {
+                $allKelas[] = [
+                    'hari' => $hari,
+                    'sesi' => $kelas['sesi'],
+                    'nama_kelas' => $kelas['nama_kelas'],
+                    'waktu' => $kelas['waktu'],
+                    'ruangan' => $kelas['ruangan']
+                ];
+            }
+        }
+
+        return view('admin.kelas.index', compact('dataKelas', 'allKelas'));
     }
 
     public function cetakPdf()
     {
-        $dataKelas = [
-            'Senin' => [
-                [
-                    'sesi' => 'Sesi 1-2', 
-                    'nama_kelas' => 'Fun Programming',
-                    'mentor' => 'Arif',
-                    'waktu' => '09:00-11:00',
-                    'ruangan' => 'Lab Komputer 1'
-                ],
-                [
-                    'sesi' => 'Sesi 3-4',
-                    'nama_kelas' => 'Web Design',
-                    'mentor' => 'Budi',
-                    'waktu' => '13:00-15:00',
-                    'ruangan' => 'Lab Multimedia'
-                ]
-            ],
-            'selasa' => [
-                [
-                    'sesi' => 'Sesi 1-2', 
-                    'nama_kelas' => 'Fun Programming',
-                    'mentor' => 'Arif',
-                    'waktu' => '09:00-11:00',
-                    'ruangan' => 'Lab Komputer 1'
-                ],
-                [
-                    'sesi' => 'Sesi 3-4',
-                    'nama_kelas' => 'Web Design',
-                    'mentor' => 'Budi',
-                    'waktu' => '13:00-15:00',
-                    'ruangan' => 'Lab Multimedia'
-                ]
-            ],
-            'rabu' => [
-                [
-                    'sesi' => 'Sesi 1-2', 
-                    'nama_kelas' => 'Fun Programming',
-                    'mentor' => 'Arif',
-                    'waktu' => '09:00-11:00',
-                    'ruangan' => 'Lab Komputer 1'
-                ],
-                [
-                    'sesi' => 'Sesi 3-4',
-                    'nama_kelas' => 'Web Design',
-                    'mentor' => 'Budi',
-                    'waktu' => '13:00-15:00',
-                    'ruangan' => 'Lab Multimedia'
-                ]
-            ],
-            'kamis' => [
-                [
-                    'sesi' => 'Sesi 1-2', 
-                    'nama_kelas' => 'Fun Programming',
-                    'mentor' => 'Arif',
-                    'waktu' => '09:00-11:00',
-                    'ruangan' => 'Lab Komputer 1'
-                ],
-                [
-                    'sesi' => 'Sesi 3-4',
-                    'nama_kelas' => 'Web Design',
-                    'mentor' => 'Budi',
-                    'waktu' => '13:00-15:00',
-                    'ruangan' => 'Lab Multimedia'
-                ]
-            ],
-            'jumat' => [
-                [
-                    'sesi' => 'Sesi 1-2', 
-                    'nama_kelas' => 'Fun Programming',
-                    'mentor' => 'Arif',
-                    'waktu' => '09:00-11:00',
-                    'ruangan' => 'Lab Komputer 1'
-                ],
-                [
-                    'sesi' => 'Sesi 3-4',
-                    'nama_kelas' => 'Web Design',
-                    'mentor' => 'Budi',
-                    'waktu' => '13:00-15:00',
-                    'ruangan' => 'Lab Multimedia'
-                ]
-            ],
-        ];
+        $dataKelas = $this->index()->getData()['dataKelas'];
         
         $pdf = PDF::loadView('admin.kelas.pdf', compact('dataKelas'));
         return $pdf->download('daftar-kelas.pdf');
