@@ -78,28 +78,22 @@
                     <div>
                         <label for="tanggal_lahir" class="block text-gray-700 mb-2">Tanggal Lahir<span class="text-red-500">*</span></label>
                         <input type="date" name="tanggal_lahir" id="tanggal_lahir" 
-                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" 
-                               required>
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" 
+                            required>
                     </div>
                 </div>
 
                 <div>
                     <label for="alamat" class="block text-gray-700 mb-2">Alamat<span class="text-red-500">*</span></label>
                     <textarea name="alamat" id="alamat" rows="3" 
-                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" 
-                              required></textarea>
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" 
+                            required></textarea>
                 </div>
 
                 <div>
                     <label for="no_telp" class="block text-gray-700 mb-2">No. Telepon</label>
                     <input type="text" name="no_telp" id="no_telp" 
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
-                </div>
-
-                <div class="flex items-center">
-                    <input type="checkbox" id="agree" name="agree" 
-                           class="w-4 h-4 text-orange-500 border-gray-300 rounded focus:ring-orange-500" required>
-                    <label for="agree" class="ml-2 text-sm text-gray-600">Saya menyetujui syarat dan ketentuan</label>
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
                 </div>
 
                 <button type="submit" 
@@ -110,18 +104,10 @@
         </div>
 
         <!-- Bagian Kanan - Gambar -->
-        <div class="hidden md:block md:w-1/2 bg-orange-500 relative">
-            <div class="absolute inset-0 bg-gradient-to-b from-orange-400 to-orange-600 opacity-90"></div>
-            <img src="{{ asset('images/Hero 1.png') }}" alt="Library Background" 
+        <div class="hidden md:block md:w-1/2 relative">
+            <div class="absolute inset-0 "></div>
+            <img src="{{ asset('images/buku.png') }}" alt="Library Background" 
                 class="w-full h-full object-cover">
-            <div class="absolute inset-0 flex items-center justify-center p-12 text-white">
-                <div class="text-center">
-                    <h3 class="text-3xl font-bold mb-4">Selamat Datang</h3>
-                    <p class="text-lg mb-6">Broadband Learning Center Surabaya</p>
-                    <div class="w-16 h-1 bg-white mx-auto mb-6"></div>
-                    <p class="text-sm opacity-80">Kota Surabaya</p>
-                </div>
-            </div>
         </div>
     </div>
 

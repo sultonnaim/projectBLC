@@ -1,14 +1,14 @@
-<header class="bg-white shadow-sm z-20">
-  <div class="flex items-center justify-between px-6 py-4">
+<header class="bg-white shadow-sm z-40">
+  <div class="flex items-center justify-between px-6 py-5">
     <div class="flex items-center">
       <!-- Hamburger Button-->
       <button @click="mobileSidebarOpen = !mobileSidebarOpen" 
-              class="xl:hidden mr-4 text-gray-500 hover:text-gray-700 focus:outline-none">
+              class="xl:hidden mr-4 text-gray-500 hover:text-orange-700 focus:outline-none">
         <i class="fas fa-bars text-lg"></i>
       </button>
       
       <!-- Page Title -->
-      <h2 class="text-lg font-semibold text-gray-800">
+      <h2 class="text-lg font-bold text-orange-500">
         @hasSection('page-title')
           @yield('page-title')
         @else
@@ -19,7 +19,7 @@
     
     <div class="flex items-center space-x-4">
       <!-- Notifikasi -->
-      <button class="p-1 text-gray-500 hover:text-gray-700">
+      <button class="p-1 text-gray-500 hover:text-orange-700">
         <i class="fas fa-bell"></i>
       </button>
       
@@ -32,7 +32,7 @@
         
         <div x-show="open" @click.away="open = false" 
             class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
-          <a href="{{ route('admin.profile') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+          <a href="{{ route('admin.profile') }}" class="block px-4 py-2 text-sm text-orange-700 hover:bg-gray-100">
             <i class="fas fa-user-circle mr-2"></i> Profile
           </a>
           <form method="POST" action="{{ route('logout') }}">

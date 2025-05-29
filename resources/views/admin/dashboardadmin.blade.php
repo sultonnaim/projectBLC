@@ -3,12 +3,20 @@
 @section('page-title', 'Dashboard')
 
 @section('content')
-<div class="container mx-auto px-4 py-6">
+<div class="container mx-auto px-2 py-2">
     <!-- Header -->
-    <div class="mb-8">
-        <h1 class="text-3xl font-bold text-gray-800">Selamat Datang!</h1>
-        <p class="text-gray-600 mt-2">Jadwal pelatihan dan acara BLC Surabaya</p>
-    </div>
+  <div x-data="{ greeting: '' }" x-init="
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 11) greeting = 'Pagi';
+    else if (hour >= 11 && hour < 15) greeting = 'Siang';
+    else if (hour >= 15 && hour < 19) greeting = 'Sore';
+    else greeting = 'Malam';
+">
+    <h1 class="text-3xl font-bold text-gray-800">
+        Selamat <span x-text="greeting"></span>!
+    </h1>
+    <p class="text-orange-600 mt-2">Selamat datang di website Monitoring BLC Surabaya</p>
+</div>
 
     <!-- Calendar Controls -->
     <div class="flex justify-between items-center mb-6 bg-white p-4 rounded-lg shadow-md">
@@ -16,11 +24,8 @@
             <button class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition">
                 <i class="fas fa-plus mr-2"></i>Tambah Acara
             </button>
-            <button class="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition">
-                <i class="fas fa-filter mr-2"></i>Filter
-            </button>
         </div>
-        <div class="flex items-center space-x-4">
+        {{-- <div class="flex items-center space-x-4">
             <span class="text-lg font-medium">Mei 2025</span>
             <div class="flex space-x-2">
                 <button class="p-2 rounded-full hover:bg-gray-100">
@@ -33,7 +38,7 @@
                     Hari Ini
                 </button>
             </div>
-        </div>
+        </div> --}}
         <div>
             <select class="border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                 <option>Mingguan</option>

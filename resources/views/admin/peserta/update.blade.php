@@ -1,13 +1,14 @@
 @extends('layouts.admin')
 
-@section('page-title', 'Tambah Peserta Baru')
+@section('page-title', 'Edit Data Peserta')
 @section('content')
 <div class="container mx-auto px-2 py-2">
     <div class="bg-white rounded-lg shadow-md p-6">
-        <h1 class="text-2xl font-bold mb-6">Tambah Peserta Baru</h1>
+        <h1 class="text-2xl font-bold mb-6">Edit Data Peserta</h1>
         
-        <form action="{{ route('admin.peserta.store') }}" method="POST">
+        <form action="{{ route('admin.peserta.update', $peserta->id) }}" method="POST">
             @csrf
+            @method('PUT')
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Kolom Kiri -->
@@ -16,7 +17,7 @@
                         <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap*</label>
                         <input type="text" name="nama" required 
                                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-                                value="{{ old('nama') }}"
+                                value="{{ old('nama', $peserta->nama) }}"
                                 placeholder="Masukkan nama lengkap">
                         @error('nama')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -27,7 +28,7 @@
                         <label class="block text-sm font-medium text-gray-700 mb-1">NIK*</label>
                         <input type="text" name="nik" required 
                                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-                                value="{{ old('nik') }}"
+                                value="{{ old('nik', $peserta->nik) }}"
                                 placeholder="Masukkan NIK">
                         @error('nik')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -39,9 +40,9 @@
                         <select name="lokasi_blc" required 
                                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
                             <option value="">Pilih Lokasi BLC</option>
-                            <option value="BLC Surabaya" {{ old('lokasi_blc') == 'BLC Surabaya' ? 'selected' : '' }}>BLC Surabaya</option>
-                            <option value="BLC Barat" {{ old('lokasi_blc') == 'BLC Barat' ? 'selected' : '' }}>BLC Barat</option>
-                            <option value="BLC Timur" {{ old('lokasi_blc') == 'BLC Timur' ? 'selected' : '' }}>BLC Timur</option>
+                            <option value="BLC Surabaya" {{ old('lokasi_blc', $peserta->lokasi_blc) == 'BLC Surabaya' ? 'selected' : '' }}>BLC Surabaya</option>
+                            <option value="BLC Barat" {{ old('lokasi_blc', $peserta->lokasi_blc) == 'BLC Barat' ? 'selected' : '' }}>BLC Barat</option>
+                            <option value="BLC Timur" {{ old('lokasi_blc', $peserta->lokasi_blc) == 'BLC Timur' ? 'selected' : '' }}>BLC Timur</option>
                         </select>
                         @error('lokasi_blc')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -56,13 +57,13 @@
                         <div class="flex space-x-4">
                             <label class="inline-flex items-center">
                                 <input type="radio" name="jenis_kelamin" value="L" 
-                                    {{ old('jenis_kelamin') == 'L' ? 'checked' : '' }} required
+                                    {{ old('jenis_kelamin', $peserta->jenis_kelamin) == 'L' ? 'checked' : '' }} required
                                     class="text-blue-500 focus:ring-blue-500">
                                 <span class="ml-2">Laki-laki</span>
                             </label>
                             <label class="inline-flex items-center">
                                 <input type="radio" name="jenis_kelamin" value="P"
-                                    {{ old('jenis_kelamin') == 'P' ? 'checked' : '' }}
+                                    {{ old('jenis_kelamin', $peserta->jenis_kelamin) == 'P' ? 'checked' : '' }}
                                     class="text-blue-500 focus:ring-blue-500">
                                 <span class="ml-2">Perempuan</span>
                             </label>
@@ -77,7 +78,7 @@
                         <select name="status" 
                                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
                             <option value="">Belum Validasi</option>
-                            <option value="tervalidasi" {{ old('status') == 'tervalidasi' ? 'selected' : '' }}>Tervalidasi</option>
+                            <option value="tervalidasi" {{ old('status', $peserta->status) == 'tervalidasi' ? 'selected' : '' }}>Tervalidasi</option>
                         </select>
                         @error('status')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -93,7 +94,7 @@
                 </a>
                 <button type="submit" 
                         class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-                    Simpan Data
+                    Update Data
                 </button>
             </div>
         </form>

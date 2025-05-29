@@ -115,4 +115,5 @@ class PesertaController extends Controller
 
         return back()->with('success', 'Peserta berhasil dinonvalidasi');
     }
+
 }

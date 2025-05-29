@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 
-@section('title', 'Daftar Peserta')
+@section('page-title', 'Daftar Peserta')
 @section('content')
-<div class="container mx-auto px-4 py-8">
+<div class="container mx-auto px-2 py-2">
     <!-- Header dan Search Bar -->
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
         <div>
             <h1 class="text-2xl font-bold text-gray-800">Daftar Peserta</h1>
-            <p class="text-gray-600">Data peserta BLC Surabaya</p>
+            <p class="text-orange-600">Data peserta BLC Surabaya</p>
         </div>
         
         <div class="flex items-center gap-3">

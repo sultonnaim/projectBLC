@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 
-@section('title', 'Tambah Pengunjung')
+@section('page-title', 'Tambah Pengunjung')
 
 @section('content')
-<div class="container mx-auto px-4 py-8">
+<div class="container mx-auto px-2 py-2">
     <div class="bg-white rounded-xl shadow-md p-6">
         <h1 class="text-2xl font-bold text-gray-800 mb-6">Tambah Data Pengunjung</h1>
         

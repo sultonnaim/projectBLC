@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 
-@section('page-title', 'Tambah Foto Kegiatan')
+@section('page-title', 'Tambah Foto sosialisasi')
 @section('content')
 <div class="container mx-auto px-2 py-2">
     <div class="bg-white rounded-lg shadow-md p-6 max-w-3xl mx-auto">
         <h1 class="text-2xl font-bold text-gray-800 mb-6">Foto Kegiatan</h1>
         
-<form action="{{ route('admin.pengunjung.simpanfoto') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('admin.sosialisasi.simpanfoto') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <!-- Isi form Anda di sini -->
     <div class="space-y-6">
@@ -66,8 +66,8 @@
                 </div>
                             <!-- Tombol Simpan -->
             <div class="mt-8 flex justify-end">
-                <a href="{{ route('admin.pengunjung.index') }}" 
-                   class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400 mr-3">
+                <a href="{{ route('admin.sosialisasi.entryfoto') }}" 
+                class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400 mr-3">
                     Batal
                 </a>
                 <button type="submit"

@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 
-@section('page-title', 'Laporan Foto Pengunjung')
+@section('page-title', 'Laporan Foto sosialisasi')
 @section('content')
 <div class="container mx-auto px-2 py-2">
     <h1 class="text-2xl font-bold mb-6">Laporan Foto Kegiatan</h1>
     
         <!-- Search Bar by Date -->
     <div class="bg-white p-4 rounded-lg shadow-md mb-6">
-        <form method="GET" action="{{ route('admin.pengunjung.laporanfoto') }}" class="flex flex-col md:flex-row gap-4 items-end">
+        <form method="GET" action="{{ route('admin.sosialisasi.laporanfoto') }}" class="flex flex-col md:flex-row gap-4 items-end">
             <div class="w-full md:w-64">
                 <label for="filter_date" class="block text-sm font-medium text-gray-700 mb-1">Filter Tanggal</label>
                 <input type="date" name="filter_date" id="filter_date" 
@@ -17,7 +17,7 @@
             <button type="submit" class="bg-blue-500 hover:bg-b lue-600 text-white px-4 py-2 rounded-lg">
                 Cari
             </button>
-            <a href="{{ route('admin.pengunjung.laporanfoto') }}" 
+            <a href="{{ route('admin.sosialisasi.laporanfoto') }}" 
             class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg">
                 Reset
             </a>
@@ -43,11 +43,11 @@
                         
                         <!-- Action Buttons -->
                         <div class="mt-3 flex space-x-2">
-                            <a href="{{ route('admin.pengunjung.updatefoto', $foto->id) }}" 
+                            <a href="{{ route('admin.sosialisasi.updatefoto', $foto->id) }}" 
                             class="text-blue-600 hover:text-blue-800 text-sm font-medium">
                                 <i class="fas fa-edit mr-1"></i> Edit
                             </a>
-                            <form action="{{ route('admin.pengunjung.hapusfoto', $foto->id) }}" method="POST">
+                            <form action="{{ route('admin.sosialisasi.hapusfoto', $foto->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" 

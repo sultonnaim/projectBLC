@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 
-@section('title', 'Daftar Hadir Pelatihan')
+@section('page-title', 'Daftar Hadir Pelatihan')
 
 @section('content')
-<div class="container mx-auto px-4 py-6">
+<div class="container mx-auto px-2 py-2">
     <!-- Header -->
     <div class="flex justify-between items-center mb-6">
         <h1 class="text-2xl font-bold text-gray-800">Daftar Hadir Pelatihan</h1>

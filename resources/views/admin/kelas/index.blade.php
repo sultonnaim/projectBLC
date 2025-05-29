@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
-@section('title', 'Daftar Kelas')
+@section('page-title', 'Daftar Kelas')
 
 @section('content')
-<div class="container mx-auto px-4 py-6">
+<div class="container mx-auto px-2 py-2">
     <!-- Header -->
     <div class="flex justify-between items-center mb-8">
         <div>
             <h1 class="text-2xl font-bold text-gray-800">Daftar Kelas</h1>
-            <p class="text-gray-600">Jadwal pelatihan BLC Surabaya</p>
+            <p class="text-orange-600">Jadwal pelatihan BLC Surabaya</p>
         </div>
         <a href="{{ route('admin.kelas.cetak-pdf') }}" 
            class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center">

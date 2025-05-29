@@ -30,4 +30,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
     }
+
+        // Fungsi untuk mendapatkan salam berdasarkan waktu
+    function getTimeBasedGreeting() {
+        const hour = new Date().getHours();
+        
+        if (hour >= 5 && hour < 11) return 'Pagi';
+        if (hour >= 11 && hour < 15) return 'Siang';
+        if (hour >= 15 && hour < 19) return 'Sore';
+        return 'Malam';
+    }
+    
+    const greetingElement = document.getElementById('dynamic-greeting');
+    if (greetingElement) {
+        // Ganti 'Admin' dengan nama user yang login jika tersedia
+        const userName = '{{ Auth::user()->name ?? "Admin" }}';
+        greetingElement.textContent = `Selamat ${getTimeBasedGreeting()}, ${userName.split(' ')[0]}!`;
+    }
   });
