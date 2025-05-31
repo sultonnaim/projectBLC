@@ -39,4 +39,6 @@ class Peserta extends Model
             return $query->where('status', $status === 'belum' ? null : 'tervalidasi');
         });
     }
+
+    
 }

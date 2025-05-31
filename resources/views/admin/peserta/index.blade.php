@@ -7,7 +7,7 @@
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
         <div>
             <h1 class="text-2xl font-bold text-gray-800">Daftar Peserta</h1>
-            <p class="text-orange-600">Data peserta BLC Surabaya</p>
+            <p class="text-orange-600">Data Peserta Pelatihan Broadband Learning Center Surabaya</p>
         </div>
         
         <div class="flex items-center gap-3">
@@ -95,7 +95,7 @@
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex space-x-2">
-                                <a href="{{ route('admin.peserta.edit', $item->id) }}" 
+                                <a href="{{ route('admin.peserta.update', $item->id) }}" 
                                   class="text-blue-600 hover:text-blue-900">
                                     <i class="fas fa-edit"></i>
                                 </a>
@@ -124,11 +124,12 @@
                     @endforeach
                 </tbody>
             </table>
+            
         </div>
         
         <!-- Pagination -->
         <div class="bg-gray-50 px-6 py-3">
-            {{ $peserta->appends(request()->query())->links() }}
+            {{ $peserta->withQueryString()->links() }}
         </div>
     </div>
 </div>

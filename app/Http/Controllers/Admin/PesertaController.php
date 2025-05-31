@@ -60,7 +60,7 @@ class PesertaController extends Controller
     {
         $lokasiOptions = ['BLC Surabaya', 'BLC Barat', 'BLC Timur'];
         
-        return view('admin.peserta.edit', [
+        return view('admin.peserta.update', [
             'peserta' => $pesertum,
             'lokasiOptions' => $lokasiOptions
         ]);
@@ -115,5 +115,10 @@ class PesertaController extends Controller
 
         return back()->with('success', 'Peserta berhasil dinonvalidasi');
     }
+    public function show(Peserta $peserta)
+{
+    return view('admin.peserta.index', compact('peserta'));
+}
+
 
 }

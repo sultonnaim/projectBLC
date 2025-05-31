@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\KelasController;
 use App\Http\Controllers\Admin\PengunjungController;
 use App\Http\Controllers\Admin\PelatihanController;
 use APP\Http\Controllers\Admin\SosialisasiController;
+use APP\Http\Controllers\Admin\AcaraController;
 use Illuminate\Support\Facades\Route;
 
 // Halaman Publik (Tanpa Auth)
@@ -41,6 +42,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
             return view('admin.dashboardadmin');
         })->name('dashboardadmin');
         
+        Route::get('/acara/tambah', [AcaraController::class, 'create'])->name('admin.acara.create');
+        Route::post('/acara', [AcaraController::class, 'store'])->name('admin.acara.store');
+
         Route::resource('peserta', App\Http\Controllers\Admin\PesertaController::class);
 
         Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar');
@@ -48,9 +52,23 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('peserta/{id}/validasi', [App\Http\Controllers\Admin\PesertaController::class, 'validasi'])->name('peserta.validasi');
         Route::get('peserta/{id}/nonvalidasi', [App\Http\Controllers\Admin\PesertaController::class, 'nonvalidasi'])->name('peserta.nonvalidasi');
         Route::put('/peserta/{peserta}', [App\Http\Controllers\Admin\PesertaController::class, 'update'])->name('peserta.update');
-
+        Route::get('/peserta/{peserta}/edit', [PesertaController::class, 'edit'])->name('peserta.edit');
+        
+        // Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.index');
+        // Route::get('/kelas/cetak-pdf', [KelasController::class, 'cetakPdf'])->name('kelas.cetak-pdf');
         Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.index');
-        Route::get('/kelas/cetak-pdf', [KelasController::class, 'cetakPdf'])->name('kelas.cetak-pdf');
+        Route::get('/kelas/create', [KelasController::class, 'create'])->name('kelas.create');
+        Route::post('/kelas', [KelasController::class, 'store'])->name('kelas.store');
+        Route::get('/kelas/{kelas}/edit', [KelasController::class, 'edit'])->name('kelas.edit');
+        Route::put('/kelas/{kelas}', [KelasController::class, 'update'])->name('kelas.update');
+        Route::delete('/kelas/{kelas}', [KelasController::class, 'destroy'])->name('kelas.destroy');
+        Route::post('/kelas/{kelas}/toggle-status', [KelasController::class, 'toggleStatus'])->name('kelas.toggle-status');
+        Route::get('/kelascetak-pdf', [KelasController::class, 'cetakPdf'])->name('kelas.cetak-pdf');
+        Route::get('/{kelas}/peserta', [KelasController::class, 'peserta'])->name('kelas.peserta');
+    Route::post('/{kelas}/peserta', [KelasController::class, 'tambahPeserta'])->name('kelas.tambah-peserta');
+    Route::delete('/{kelas}/peserta/{peserta}', [KelasController::class, 'hapusPeserta'])->name('kelas.hapus-peserta');
+    Route::post('/{kelas}/complete', [KelasController::class, 'markCompleted'])->name('kelas.mark-completed');
+
 
         Route::get('/pengunjung', [PengunjungController::class, 'index'])->name('pengunjung.index');
         Route::delete('/pengunjung/{pengunjung}', [PengunjungController::class, 'destroy'])->name('pengunjung.destroy');
@@ -58,16 +76,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/pengunjung/entrypengunjung', [PengunjungController::class, 'create'])->name('pengunjung.entrypengunjung');
         Route::get('/pengunjung/entryfoto', [PengunjungController::class, 'showEntryFotoForm'])->name('pengunjung.entryfoto');
         Route::post('/pengunjung/simpan-foto', [PengunjungController::class, 'simpanFoto'])->name('pengunjung.simpanfoto');
-
         Route::get('/pengunjung/laporanfoto', [PengunjungController::class, 'showLaporanFoto'])->name('pengunjung.laporanfoto');
         Route::get('/pengunjung/updatefoto/{id}', [PengunjungController::class, 'updatefoto'])->name('pengunjung.updatefoto');
         Route::delete('/pengunjung/hapusfoto/{id}', [PengunjungController::class, 'hapusFoto'])->name('pengunjung.hapusfoto');
 
+
         Route::get('/pelatihan', [PelatihanController::class, 'index'])->name('pelatihan.index');
         Route::post('/pelatihan', [PelatihanController::class, 'updatePelatihan'])->name('pelatihan.update');
-        
-        Route::get('/pengunjung/entryfoto', [PengunjungController::class, 'showEntryFotoForm'])->name('pengunjung.entryfoto');
-        Route::post('/pengunjung/simpan-foto', [PengunjungController::class, 'simpanFoto'])->name('pengunjung.simpanfoto');
 
         Route::get('/sosialisasi/entryfoto', [\App\Http\Controllers\Admin\SosialisasiController::class, 'showEntryFotoForm'])->name('sosialisasi.entryfoto');
         Route::get('/sosialisasi/laporanfoto', [\App\Http\Controllers\Admin\SosialisasiController::class, 'showLaporanFoto'])->name('sosialisasi.laporanfoto');

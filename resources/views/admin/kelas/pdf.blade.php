@@ -1,36 +1,41 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Jadwal Kelas BLC Surabaya</title>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        .header { text-align: center; margin-bottom: 20px; }
-        .table { width: 100%; border-collapse: collapse; }
-        .table th { background-color: #f3f4f6; text-align: left; padding: 8px; }
-        .table td { padding: 8px; border-bottom: 1px solid #e5e7eb; }
-        .day-header { background-color: #e5e7eb; font-weight: bold; }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <h1>Jadwal Kelas</h1>
-        <p>BLC Surabaya - {{ date('d F Y') }}</p>
-    </div>
+<!-- Hapus dependensi gambar GD -->
+<div class="header">
+    <h1>Jadwal Kelas BLC Surabaya</h1>
+    <p>Periode: {{ now()->format('d F Y') }}</p>
+</div>
 
-    <table class="table">
-        @foreach($dataKelas as $hari => $kelas)
-        <tr class="day-header">
-            <td colspan="4">{{ $hari }}</td>
-        </tr>
-        @foreach($kelas as $item)
+<table class="table">
+    <thead>
         <tr>
-            <td width="25%">{{ $item['sesi'] }}</td>
-            <td width="30%">{{ $item['nama_kelas'] }}</td>
-            <td width="25%">{{ $item['waktu'] }} ({{ $item['ruangan'] }})</td>
+            <th>Hari</th>
+            @foreach(['Sesi 1', 'Sesi 2', 'Sesi 3', 'Sesi 4', 'Sesi 5'] as $sesi)
+                <th>{{ $sesi }}</th>
+            @endforeach
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($dataKelas as $hari => $sesiKelas)
+        <tr>
+            <td class="day-header">{{ $hari }}</td>
+            @foreach(['Sesi 1', 'Sesi 2', 'Sesi 3', 'Sesi 4', 'Sesi 5'] as $sesi)
+                <td>
+                    @if(isset($sesiKelas[$sesi]))
+                        @foreach($sesiKelas[$sesi] as $kelas)
+                            <div class="mb-2">
+                                <strong>{{ $kelas->nama_kelas }}</strong><br>
+                                {{ $kelas->materi }}<br>
+                                <small>
+                                    {{ $kelas->ruangan }} | 
+                                    {{ $kelas->pesertas_count }} peserta
+                                </small>
+                            </div>
+                        @endforeach
+                    @else
+                        <span class="text-gray-400">-</span>
+                    @endif
+                </td>
+            @endforeach
         </tr>
         @endforeach
-        @endforeach
-    </table>
-</body>
-</html>
+    </tbody>
+</table>

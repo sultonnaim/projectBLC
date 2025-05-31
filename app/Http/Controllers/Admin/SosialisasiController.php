@@ -40,7 +40,7 @@ public function simpanFoto(Request $request)
     ]);
 
     // Simpan file foto
-    $path = $request->file('foto')->store('foto-sosialiasi', 'public');
+    $path = $request->file('foto')->store('foto-sosialisasi', 'public');
 
     // Simpan ke database
     DB::table('sosialisasi_foto')->insert([

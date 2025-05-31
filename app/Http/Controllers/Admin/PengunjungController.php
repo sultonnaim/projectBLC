@@ -142,4 +142,43 @@ public function hapusFoto($id)
     return back()->with('success', 'Foto berhasil dihapus');
 }
 
+public function updateFoto(Request $request, $id)
+{
+    $request->validate([
+        'tanggal' => 'required|date',
+        'sesi' => 'required|string|in:1 (08.00-12.00),2 (12.00-16.00),3 (16.00-20.00),4 (16.00-20.00),5 (16.00-20.00)',
+        'keterangan' => 'nullable|string|max:500',
+        'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+    ]);
+
+    $foto = DB::table('pengunjung_foto')->where('id', $id)->first();
+    
+    if (!$foto) {
+        abort(404);
+    }
+
+    $data = [
+        'tanggal' => $request->tanggal,
+        'sesi' => $request->sesi,
+        'keterangan' => $request->keterangan,
+        'updated_at' => now()
+    ];
+
+    if ($request->hasFile('foto')) {
+        // Hapus foto lama
+        if ($foto->path_foto) {
+            Storage::delete('public/' . $foto->path_foto);
+        }
+        
+        // Simpan foto baru
+        $path = $request->file('foto')->store('public/foto-pengunjung');
+        $data['path_foto'] = str_replace('public/', '', $path);
+    }
+
+    DB::table('pengunjung_foto')->where('id', $id)->update($data);
+
+    return redirect()->route('pengunjung.laporanfoto')
+        ->with('success', 'Foto kegiatan berhasil diperbarui');
+}
+
 }

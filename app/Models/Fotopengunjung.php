@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PengunjungFoto extends Model
+class Foto extends Model
 {
     use HasFactory;
 
-    protected $table = 'pengunjung_foto';
-    protected $primaryKey = 'id';
-
+    protected $table = 'foto_kegiatan';
+    
     protected $fillable = [
         'tanggal',
         'sesi',
@@ -19,7 +18,5 @@ class PengunjungFoto extends Model
         'path_foto'
     ];
 
-    protected $casts = [
-        'tanggal' => 'date'
-    ];
+    protected $dates = ['tanggal'];
 }

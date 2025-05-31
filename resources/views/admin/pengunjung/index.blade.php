@@ -8,7 +8,7 @@
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
         <div>
             <h1 class="text-2xl font-bold text-gray-800">Daftar Pengunjung</h1>
-            <p class="text-orange-600">Data pengunjung BLC Surabaya</p>
+            <p class="text-orange-600">Data Pengunjung Broadband Learning Center Surabaya</p>
         </div>
         
         <div class="flex items-center gap-3">
