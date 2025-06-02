@@ -8,7 +8,7 @@
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
         <div>
             <h1 class="text-2xl font-bold text-gray-700">Daftar Kelas</h1>
-            <p class="text-orange-600">Jadwal pelatihan Broadband Learning C Surabaya</p>
+            <p class="text-orange-600">Jadwal pelatihan Broadband Learning Center Surabaya</p>
         </div>
         <div class="flex gap-3">
             <a href="{{ route('admin.kelas.cetak-pdf') }}" 
@@ -114,7 +114,8 @@
                                 {{ implode(', ', $kelas->hari) }}
                             </div>
                             <div class="text-sm text-gray-700">
-                                {{ $kelas->sesi }} ({{ $kelas->jam_mulai }} - {{ $kelas->jam_selesai }})
+                                {{ $kelas->sesi }} 
+                                {{-- ({{ $kelas->jam_mulai }} - {{ $kelas->jam_selesai }}) --}}
                             </div>
                         </td>
                         <td class="px-4 py-4 text-sm text-gray-700">
@@ -122,13 +123,13 @@
                         </td>
                         <td class="px-4 py-4 text-center">
                             <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs">
-                                {{ $kelas->pesertas_count }} peserta
+                            {{ $kelas->pesertas_count }} peserta
                             </span>
                             <a href="{{ route('admin.kelas.index', $kelas->id) }}" 
-                               class="block mt-1 text-xs text-blue-600 hover:underline">
-                                Kelola Peserta
+                            class="block mt-1 text-xs text-blue-600 hover:underline">
+                            Kelola Peserta
                             </a>
-                        </td>
+                            </td>
                         <td class="px-4 py-4">
                             <form action="{{ route('admin.kelas.toggle-status', $kelas->id) }}" method="POST">
                                 @csrf
@@ -141,13 +142,8 @@
                         <td class="px-4 py-4">
                             <div class="flex flex-col space-y-2">
                                 <a href="{{ route('admin.kelas.edit', $kelas->id) }}" 
-                                   class="text-blue-600 hover:text-blue-900 text-sm flex items-center">
+                                    class="text-blue-600 hover:text-blue-900 text-sm flex items-center">
                                     <i class="fas fa-edit mr-1"></i> Edit
-                                </a>
-                                <a href="{{ route('admin.kelas.mark-completed', $kelas->id) }}" 
-                                   class="text-purple-600 hover:text-purple-900 text-sm flex items-center">
-                                    <i class="fas fa-check-circle mr-1"></i> 
-                                    {{ $kelas->completed ? 'Aktifkan' : 'Selesai' }}
                                 </a>
                                 <form action="{{ route('admin.kelas.destroy', $kelas->id) }}" method="POST">
                                     @csrf
@@ -165,10 +161,12 @@
                 </tbody>
             </table>
         </div>
-        
-        <!-- Pagination -->
-        <div class="px-6 py-4 bg-gray-50 border-t border-gray-200">
-            {{ $allKelas->appends(request()->query())->links() }}
+
+    <!-- Pagination -->
+   <div class="px-6 py-4 bg-gray-50 border-t border-gray-200">
+        {{ $allKelas->appends(request()->query())->links() }}
+    </div>
+</div>
         </div>
     </div>
 </div>

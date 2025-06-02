@@ -27,26 +27,22 @@ return new class extends Migration
 
 Schema::create('kelas_peserta', function (Blueprint $table) {
     $table->foreignId('kelas_id')->constrained()->onDelete('cascade');
-    $table->foreignId('peserta_id')->constrained()->onDelete('cascade');
-    $table->enum('status', ['aktif', 'selesai', 'dropout'])->default('aktif');
+
+    $table->foreignId('peserta_id')
+            ->constrained('peserta')
+            ->onDelete('cascade');
+
+    $table->enum('status', ['aktif','selesai','dropout'])->default('aktif');
     $table->date('tanggal_daftar')->default(now());
     $table->primary(['kelas_id', 'peserta_id']);
 });
 
-// Migration terpisah untuk fitur tambahan
-Schema::create('kelas_materi', function (Blueprint $table) {
-    $table->id();
-    $table->foreignId('kelas_id')->constrained();
-    $table->string('judul_materi', 100);
-    $table->text('deskripsi')->nullable();
-    $table->string('file_path')->nullable();
-    $table->integer('urutan');
-    $table->timestamps();
-});
     }
 
-    public function down(): void
-    {
-        Schema::dropIfExists('kelas_tables');
-    }
+   public function down(): void
+{
+    Schema::dropIfExists('kelas_materi');
+    Schema::dropIfExists('kelas_peserta');
+    Schema::dropIfExists('kelas');        
+}
 };

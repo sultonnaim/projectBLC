@@ -54,8 +54,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::put('/peserta/{peserta}', [App\Http\Controllers\Admin\PesertaController::class, 'update'])->name('peserta.update');
         Route::get('/peserta/{peserta}/edit', [PesertaController::class, 'edit'])->name('peserta.edit');
         
-        // Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.index');
-        // Route::get('/kelas/cetak-pdf', [KelasController::class, 'cetakPdf'])->name('kelas.cetak-pdf');
         Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.index');
         Route::get('/kelas/create', [KelasController::class, 'create'])->name('kelas.create');
         Route::post('/kelas', [KelasController::class, 'store'])->name('kelas.store');
@@ -64,11 +62,24 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::delete('/kelas/{kelas}', [KelasController::class, 'destroy'])->name('kelas.destroy');
         Route::post('/kelas/{kelas}/toggle-status', [KelasController::class, 'toggleStatus'])->name('kelas.toggle-status');
         Route::get('/kelascetak-pdf', [KelasController::class, 'cetakPdf'])->name('kelas.cetak-pdf');
-        Route::get('/{kelas}/peserta', [KelasController::class, 'peserta'])->name('kelas.peserta');
-    Route::post('/{kelas}/peserta', [KelasController::class, 'tambahPeserta'])->name('kelas.tambah-peserta');
-    Route::delete('/{kelas}/peserta/{peserta}', [KelasController::class, 'hapusPeserta'])->name('kelas.hapus-peserta');
-    Route::post('/{kelas}/complete', [KelasController::class, 'markCompleted'])->name('kelas.mark-completed');
+        Route::post('/{kelas}/complete', [KelasController::class, 'markCompleted'])->name('kelas.mark-completed');
 
+
+// Menampilkan halaman kelola peserta (GET)
+Route::get('/admin/kelas/{kelas}/kelola-peserta', [KelasController::class, 'kelolaPeserta'])
+     ->name('admin.kelas.kelola-peserta');
+
+// Menyimpan peserta baru (POST)
+Route::post('/admin/kelas/{kelas}/peserta', [KelasController::class, 'simpanPeserta'])
+     ->name('admin.kelas.simpan-peserta');
+
+// Mengupdate peserta (PUT)
+Route::put('/admin/kelas/{kelas}/peserta/{peserta}', [KelasController::class, 'updatePeserta'])
+     ->name('admin.kelas.update-peserta');
+
+// Menghapus peserta (DELETE)
+Route::delete('/admin/kelas/{kelas}/peserta/{peserta}', [KelasController::class, 'hapusPeserta'])
+     ->name('admin.kelas.hapus-peserta');
 
         Route::get('/pengunjung', [PengunjungController::class, 'index'])->name('pengunjung.index');
         Route::delete('/pengunjung/{pengunjung}', [PengunjungController::class, 'destroy'])->name('pengunjung.destroy');
