@@ -15,7 +15,11 @@
         </div>
             <nav>
                 <ul class="flex justify-center gap-10">
-                    <li><a href="/" class="px-2 py-2 hover:text-orange-400">Beranda</a></li>
+                    <li>
+            <a href="/" class="px-2 py-2 hover:text-orange-400 {{ request()->is('/') ? 'font-bold text-orange-500' : '' }}">
+                Beranda
+            </a>
+        </li>
                     <li class="relative" x-data="{ open: false }">
                         <button @click="open = !open" class="hover:text-orange-600 focus:outline-none">Informasi</button>
                     
