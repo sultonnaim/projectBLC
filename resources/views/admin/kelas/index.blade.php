@@ -125,7 +125,7 @@
                             <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs">
                             {{ $kelas->pesertas_count }} peserta
                             </span>
-                            <a href="{{ route('admin.kelas.index', $kelas->id) }}" 
+                            <a href="{{ route('admin.kelas.kelola-peserta', $kelas->id) }}" 
                             class="block mt-1 text-xs text-blue-600 hover:underline">
                             Kelola Peserta
                             </a>

@@ -23,25 +23,36 @@
         <form method="GET" class="flex flex-col md:flex-row gap-4">
             <!-- Search by Name -->
             <div class="flex-1">
-                <input type="text" name="search" placeholder="Cari nama peserta..." 
+                <input type="text" name="search" placeholder="Cari peserta..." 
                     value="{{ request('search') }}"
                     class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
             </div>
             
-            <!-- Location Filter -->
+            <!-- Kategori Filter -->
             <div class="flex-1">
-                <select name="lokasi_blc" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
-                    <option value="">Semua Lokasi</option>
-                    <option value="BLC Surabaya" {{ request('lokasi_blc') == 'BLC Surabaya' ? 'selected' : '' }}>BLC Surabaya</option>
-                    <option value="BLC Barat" {{ request('lokasi_blc') == 'BLC Barat' ? 'selected' : '' }}>BLC Barat</option>
-                    <option value="BLC Timur" {{ request('lokasi_blc') == 'BLC Timur' ? 'selected' : '' }}>BLC Timur</option>
+                <select name="kategori" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
+                    <option value="">Kategori</option>
+                    <option value="sd" {{ request('kategori') == 'sd' ? 'selected' : '' }}>SD</option>
+                    <option value="smp" {{ request('kategori') == 'smp' ? 'selected' : '' }}>SMP</option>
+                    <option value="sma" {{ request('kategori') == 'sma' ? 'selected' : '' }}>SMA</option>
+                    <option value="umum" {{ request('kategori') == 'umum' ? 'selected' : '' }}>Umum</option>
+                </select>
+            </div>
+            
+            <!-- Materi Filter -->
+            <div class="flex-1">
+                <select name="materi" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
+                    <option value="">Materi</option>
+                    <option value="fun_programing" {{ request('materi') == 'fun_programing' ? 'selected' : '' }}>Fun Programming</option>
+                    <option value="desain_grafis" {{ request('materi') == 'desain_grafis' ? 'selected' : '' }}>Desain Grafis</option>
+                    <option value="aplikasi_perkantoran" {{ request('materi') == 'aplikasi_perkantoran' ? 'selected' : '' }}>Aplikasi Perkantoran</option>
                 </select>
             </div>
             
             <!-- Status Filter -->
             <div class="flex-1">
                 <select name="status" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
-                    <option value="">Semua Status</option>
+                    <option value="">Status</option>
                     <option value="tervalidasi" {{ request('status') == 'tervalidasi' ? 'selected' : '' }}>Tervalidasi</option>
                     <option value="belum" {{ request('status') == 'belum' ? 'selected' : '' }}>Belum Validasi</option>
                 </select>
@@ -66,8 +77,9 @@
                         <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
                         <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
                         <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">NIK</th>
-                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Lokasi BLC</th>
                         <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenis Kelamin</th>
+                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kategori</th>
+                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Materi</th>
                         <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                         <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                     </tr>
@@ -78,11 +90,31 @@
                         <td class="px-4 py-3 whitespace-nowrap">{{ $peserta->firstItem() + $key }}</td>
                         <td class="px-4 py-3 whitespace-nowrap">{{ $item->nama }}</td>
                         <td class="px-4 py-3 whitespace-nowrap">{{ $item->nik }}</td>
-                        <td class="px-4 py-3 whitespace-nowrap">{{ $item->lokasi_blc }}</td>
                         <td class="px-4 py-3 whitespace-nowrap">
                             {{ $item->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
+                        <td class="px-4 py-3 whitespace-nowrap">
+                            @php
+                                $kategoriLabels = [
+                                    'sd' => 'SD',
+                                    'smp' => 'SMP',
+                                    'sma' => 'SMA',
+                                    'umum' => 'Umum'
+                                ];
+                            @endphp
+                            {{ $kategoriLabels[$item->kategori] ?? $item->kategori }}
+                        </td>
+                        <td class="px-4 py-3 whitespace-nowrap">
+                            @php
+                                $materiLabels = [
+                                    'fun_programing' => 'Fun Programming',
+                                    'desain_grafis' => 'Desain Grafis',
+                                    'aplikasi_perkantoran' => 'Aplikasi Perkantoran'
+                                ];
+                            @endphp
+                            {{ $materiLabels[$item->materi] ?? $item->materi }}
+                        </td>
+                         <td class="px-6 py-4 whitespace-nowrap">
                             @if($item->status == 'tervalidasi')
                                 <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">
                                     Tervalidasi

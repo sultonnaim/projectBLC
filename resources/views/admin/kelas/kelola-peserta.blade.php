@@ -16,6 +16,7 @@
                     <div class="flex justify-between items-center p-3 border rounded-lg">
                         <span>{{ $peserta->nama }}</span>
                         <form action="{{ route('admin.kelas.hapus-peserta', [$kelas->id, $peserta->id]) }}" method="POST">
+                            @csrf
                             @method('DELETE')
                             <button type="submit" class="text-red-600 hover:text-red-800 text-sm">
                                 <i class="fas fa-trash-alt mr-1"></i> Hapus
@@ -31,9 +32,8 @@
             <!-- Tambah Peserta Baru -->
             <div>
                 <h2 class="text-lg font-semibold mb-3">Tambah Peserta Baru</h2>
-               <form action="{{ route('admin.kelas.update-peserta', [$kelas->id, $peserta->id]) }}" method="POST">
-                    @csrf
-                    @method('PUT')
+<form action="{{ route('admin.kelas.simpan-peserta', $kelas->id) }}" method="POST">
+    @csrf
                     <select name="pesertas[]" multiple 
                             class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 h-[200px]">
                         @foreach($semuaPeserta as $peserta)
@@ -52,7 +52,7 @@
         <div class="mt-6">
             <a href="{{ route('admin.kelas.index') }}" 
                 class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400">
-                Kembali ke Daftar Kelas
+                Kembali
             </a>
         </div>
     </div>

@@ -1,12 +1,13 @@
-<header class="bg-white shadow-sm z-40">
-  <div class="flex items-center justify-between px-6 py-5">
+<header class="bg-white shadow-sm z-30">
+  <div class="flex items-center justify-between px-6 py-4">
     <div class="flex items-center">
-      <!-- Hamburger Button-->
-      <button @click="mobileSidebarOpen = !mobileSidebarOpen" 
-              class="xl:hidden mr-4 text-gray-500 hover:text-orange-700 focus:outline-none">
-        <i class="fas fa-bars text-lg"></i>
+      <!-- Hamburger Button -->
+      <button @click="sidebarOpen = !sidebarOpen" 
+              class="mr-4 text-gray-600 hover:text-orange-600 focus:outline-none">
+        <i x-show="!sidebarOpen" class="fas fa-bars text-lg"></i>
       </button>
       
+        
       <!-- Page Title -->
       <h2 class="text-lg font-bold text-orange-500">
         @hasSection('page-title')

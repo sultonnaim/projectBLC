@@ -30,9 +30,13 @@ class Kelas extends Model
 
     public function pesertas()
     {
-        return $this->belongsToMany(Peserta::class, 'kelas_peserta')
-                    ->withPivot(['status', 'tanggal_daftar'])
-                    ->withTimestamps();
+        return $this->belongsToMany(
+        Peserta::class,
+        'kelas_peserta',
+        'kelas_id',
+        'peserta_id'
+    )
+     ->withPivot(['status', 'tanggal_daftar']);
     }
 
 
@@ -45,6 +49,11 @@ protected $appends = ['pesertas_count'];
 public function getPesertasCountAttribute()
 {
     return $this->pesertas()->count();
+}
+
+public function absensi()
+{
+    return $this->hasMany(Absensi::class);
 }
 
 }

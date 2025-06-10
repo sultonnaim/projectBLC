@@ -9,30 +9,41 @@ class Peserta extends Model
 {
     use HasFactory;
 
-    protected $table = 'peserta';
+    protected $table = 'pesertaS';
 
     protected $fillable = [
         'nama',
         'nik',
-        'lokasi_blc',
+        'tanggal_lahir',
         'jenis_kelamin',
+        'alamat',
+        'kecamatan',
+        'kelurahan',
+        'email',
+        'no_telp',
+        'kategori',
+        'materi',
         'status',
     ];
 
     protected $casts = [
+        'tanggal_lahir' => 'date',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
 
-    // Scope untuk filter pencarian
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? false, function($query, $search) {
             return $query->where('nama', 'like', '%'.$search.'%');
         });
 
-        $query->when($filters['lokasi_blc'] ?? false, function($query, $lokasi) {
-            return $query->where('lokasi_blc', $lokasi);
+        $query->when($filters['kategori'] ?? false, function($query, $kategori) {
+            return $query->where('kategori', $kategori);
+        });
+
+        $query->when($filters['materi'] ?? false, function($query, $materi) {
+            return $query->where('materi', $materi);
         });
 
         $query->when($filters['status'] ?? false, function($query, $status) {
@@ -40,5 +51,8 @@ class Peserta extends Model
         });
     }
 
-    
+    public function absensi()
+{
+    return $this->hasMany(Absensi::class);
+}
 }

@@ -8,15 +8,13 @@ use Illuminate\Http\Request;
 
 class PesertaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         $peserta = Peserta::query()
             ->filter([
                 'search' => $request->search,
-                'lokasi_blc' => $request->lokasi_blc,
+                'kategori' => $request->kategori,
+                'materi' => $request->materi,
                 'status' => $request->status,
             ])
             ->latest()
@@ -25,26 +23,32 @@ class PesertaController extends Controller
         return view('admin.peserta.index', compact('peserta'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        $lokasiOptions = ['BLC Surabaya', 'BLC Barat', 'BLC Timur'];
+        $kategoriOptions = ['sd' => 'SD', 'smp' => 'SMP', 'sma' => 'SMA', 'umum' => 'Umum'];
+        $materiOptions = [
+            'fun_programing' => 'Fun Programming',
+            'desain_grafis' => 'Desain Grafis',
+            'aplikasi_perkantoran' => 'Aplikasi Perkantoran'
+        ];
         
-        return view('admin.peserta.create', compact('lokasiOptions'));
+        return view('admin.peserta.create', compact('kategoriOptions', 'materiOptions'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
             'nik' => 'required|string|max:20|unique:peserta,nik',
-            'lokasi_blc' => 'required|string',
+            'tanggal_lahir' => 'required|date',
             'jenis_kelamin' => 'required|in:L,P',
+            'alamat' => 'required|string',
+            'kecamatan' => 'required|string',
+            'kelurahan' => 'required|string',
+            'email' => 'nullable|email',
+            'no_telp' => 'nullable|string',
+            'kategori' => 'required|in:sd,smp,sma,umum',
+            'materi' => 'required|in:fun_programing,desain_grafis,aplikasi_perkantoran',
         ]);
 
         Peserta::create($validated);
@@ -53,29 +57,36 @@ class PesertaController extends Controller
             ->with('success', 'Peserta berhasil ditambahkan');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Peserta $pesertum)
     {
-        $lokasiOptions = ['BLC Surabaya', 'BLC Barat', 'BLC Timur'];
+        $kategoriOptions = ['sd' => 'SD', 'smp' => 'SMP', 'sma' => 'SMA', 'umum' => 'Umum'];
+        $materiOptions = [
+            'fun_programing' => 'Fun Programming',
+            'desain_grafis' => 'Desain Grafis',
+            'aplikasi_perkantoran' => 'Aplikasi Perkantoran'
+        ];
         
         return view('admin.peserta.update', [
             'peserta' => $pesertum,
-            'lokasiOptions' => $lokasiOptions
+            'kategoriOptions' => $kategoriOptions,
+            'materiOptions' => $materiOptions
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Peserta $pesertum)
     {
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
             'nik' => 'required|string|max:20|unique:peserta,nik,'.$pesertum->id,
-            'lokasi_blc' => 'required|string',
+            'tanggal_lahir' => 'required|date',
             'jenis_kelamin' => 'required|in:L,P',
+            'alamat' => 'required|string',
+            'kecamatan' => 'required|string',
+            'kelurahan' => 'required|string',
+            'email' => 'nullable|email',
+            'no_telp' => 'nullable|string',
+            'kategori' => 'required|in:sd,smp,sma,umum',
+            'materi' => 'required|in:fun_programing,desain_grafis,aplikasi_perkantoran',
         ]);
 
         $pesertum->update($validated);
@@ -84,9 +95,6 @@ class PesertaController extends Controller
             ->with('success', 'Data peserta berhasil diperbarui');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Peserta $pesertum)
     {
         $pesertum->delete();
@@ -94,10 +102,7 @@ class PesertaController extends Controller
         return back()->with('success', 'Peserta berhasil dihapus');
     }
 
-    /**
-     * Validasi peserta
-     */
-    public function validasi($id)
+public function validasi($id)
     {
         $peserta = Peserta::findOrFail($id);
         $peserta->update(['status' => 'tervalidasi']);
@@ -116,9 +121,7 @@ class PesertaController extends Controller
         return back()->with('success', 'Peserta berhasil dinonvalidasi');
     }
     public function show(Peserta $peserta)
-{
-    return view('admin.peserta.index', compact('peserta'));
-}
-
-
+    {
+        return view('admin.peserta.index', compact('peserta'));
+    }
 }

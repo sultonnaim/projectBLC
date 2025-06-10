@@ -28,6 +28,10 @@ return new class extends Migration
 Schema::create('kelas_peserta', function (Blueprint $table) {
     $table->foreignId('kelas_id')->constrained()->onDelete('cascade');
 
+    $table->id();
+    $table->string('nama');
+    $table->timestamps();
+
     $table->foreignId('peserta_id')
             ->constrained('peserta')
             ->onDelete('cascade');

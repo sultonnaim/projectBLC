@@ -10,16 +10,19 @@
         }
       }"
       class="fixed inset-y-0 left-0 z-30 w-64 bg-white shadow-lg transform lg:translate-x-0 transition-transform duration-200 ease-in-out"
-      :class="{ '-translate-x-full': !mobileSidebarOpen }">
-  
+      :class="{ '-translate-x-full': !mobileSidebarOpen }"
+      @click.away="if(!$screen('lg')) mobileSidebarOpen = false">
   <!-- Logo Section -->
-  <div class="mx-auto flex max-w-sm items-center gap-x-4 rounded-xl bg-white p-3 shadow-lg">
-    <img src="/images/logo.png" alt="Logo Blc" class="h-10 w-auto">
-    <h1 class="text-xl font-bold text-orange-500">Broadband Learning Center</h1>
-    <button @click="mobileSidebarOpen = false" class="lg:hidden text-gray-500">
+  <div class="flex items-center justify-between p-4 border-b">
+    <div class="flex items-center gap-x-3">
+      <img src="/images/logo.png" alt="Logo Blc" class="h-10 w-auto">
+      <h1 class="text-xl font-bold text-orange-500">Broadband Learning Center</h1>
+    </div>
+    <button @click="mobileSidebarOpen = false" class="lg:hidden text-gray-500 hover:text-orange-600">
       <i class="fas fa-times"></i>
     </button>
   </div>
+  
   
   <!-- Menu Container -->
   <div class="overflow-y-auto h-[calc(100vh-5rem)] px-2 py-4 scrollbar-thin scrollbar-thumb-orange-300 scrollbar-track-orange-100">
@@ -160,9 +163,9 @@
             <i class="fas fa-plus-circle mr-2"></i>
             Kehadiran
           </a>
-          <a href="{{ route('admin.dashboardadmin') }}" 
+          <a href="{{ route('admin.pelatihan.laporan') }}" 
             class="block px-4 py-2 text-sm rounded-lg transition-all
-                    {{ request()->routeIs('admin.dashboardadmin') ? 
+                    {{ request()->routeIs('admin.pelatihan.laporan') ? 
                       'bg-orange-100 text-orange-600' : 
                       'text-gray-800 hover:bg-orange-400' }}">
             <i class="fas fa-file-alt mr-2"></i>

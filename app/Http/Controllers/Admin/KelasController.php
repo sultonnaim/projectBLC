@@ -34,7 +34,6 @@ public function index(Request $request)
     return view('admin.kelas.index', compact('dataKelas', 'allKelas'));
 
     $validated = $request->validate([
-        // validasi lainnya...
         'pesertas' => 'nullable|array',
         'pesertas.*' => 'exists:pesertas,id'
     ]);
