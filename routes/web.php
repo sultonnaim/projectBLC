@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\PelatihanController;
 use APP\Http\Controllers\Admin\SosialisasiController;
 use APP\Http\Controllers\Admin\AcaraController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SuperAdminController;
 
 // Halaman Publik (Tanpa Auth)
 Route::view('/', 'public.home')->name('home');
@@ -111,11 +112,19 @@ Route::delete('/admin/kelas/{kelas}/peserta/{peserta}', [KelasController::class,
     });
     
     // Super Admin Area
-    Route::prefix('superadmin')->name('superadmin.')->group(function () {
-        Route::get('/dashboard', function () {
-            return view('superadmin.dashboard');
-        })->name('dashboard');
-    });
+    // Super Admin Area
+Route::prefix('superadmin')->name('superadmin.')->group(function () {
+    Route::get('/', function () {
+        return view('superadmin.dashboardsuperadmin');
+    })->name('dashboardsuperadmin');
+
+    Route::get('/profile', function () {
+        return view('superadmin.profile.profile');
+    })->name('profile');
+});
+
+
+
 });
 
 require __DIR__.'/auth.php';
