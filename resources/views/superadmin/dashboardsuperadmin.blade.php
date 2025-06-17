@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.superadmin')
 
 @section('page-title', 'Dashboard')
 
@@ -17,11 +17,11 @@
             <h1 class="text-3xl font-bold text-gray-800">
                 Selamat <span x-text="greeting"></span>!
             </h1>
-            <p class="text-orange-600 mt-2">Selamat Datang di Monitoring Broadband Learning Center Surabaya</p>
+            <p class="text-orange-600 mt-2">Selamat Datang di Monitoring Broadband Learning Center Surabaya Super Admin</p>
         </div>
 
         <!-- Tombol Tambah Acara -->
-        <a href="{{ route('admin.dashboardadmin') }}" 
+        <a href="{{ route('superadmin.dashboardsuperadmin') }}" 
            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center">
             <i class="fas fa-plus mr-2"></i>Tambah Acara
         </a>

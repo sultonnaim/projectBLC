@@ -1,7 +1,7 @@
 <aside x-data="{ 
     mobileSidebarOpen: false,
     openMenus: {
-        peserta: {{ request()->routeIs('admin.peserta.*') ? 'true' : 'false' }},
+        masterdata: {{ request()->routeIs('superadmin.masterdata.*') ? 'true' : 'false' }},
         kelas: {{ request()->routeIs('admin.kelas.*') ? 'true' : 'false' }},
         pelatihan: {{ request()->routeIs('admin.pelatihan.*') ? 'true' : 'false' }},
         pengunjung: {{ request()->routeIs('admin.pengunjung.*') ? 'true' : 'false' }},
@@ -25,55 +25,52 @@
 <div class="overflow-y-auto h-[calc(100vh-5rem)] px-2 py-4 scrollbar-thin scrollbar-thumb-orange-300 scrollbar-track-orange-100">
 <nav class="p-4 space-y-1">
   <!-- Dashboard -->
-  <a href="{{ route('admin.dashboardadmin') }}" 
+  <a href="{{ route('superadmin.dashboardsuperadmin') }}" 
     class="flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-all
-            {{ request()->routeIs('admin.dashboardadmin') ? 
+            {{ request()->routeIs('superadmin.dashboardsuperadmin') ? 
               'bg-orange-100 text-orange-600' : 
               'text-gray-800 hover:bg-orange-500' }}">
     <i class="fas fa-tachometer-alt mr-3"></i>
     <span>Dashboard</span>
   </a>
 
-  <!-- Menu Pengunjung -->
+  <!-- Menu Kelola Akun -->
   <div class="space-y-1">
-    <button @click="openMenus.pengunjung = !openMenus.pengunjung" 
+    <button @click="openMenus.masterdata = !openMenus.masterdata" 
             class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-all
-                  {{ request()->routeIs('admin.pengunjung.*') ? 
+                  {{ request()->routeIs('superadmin.masterdata.*') ? 
                     'bg-orange-100 text-orange-600' : 
                     'text-gray-800 hover:bg-orange-500' }}">
       <div class="flex items-center">
-        <i class="fas fa-user-friends mr-3"></i>
-        <span>Pengunjung</span>
+        <i class="fas fa-database mr-3"></i>
+        <span>Master Data</span>
       </div>
       <i class="fas fa-chevron-down text-xs transition-transform duration-200" 
-          :class="{ 'rotate-180': openMenus.pengunjung }"></i>
+          :class="{ 'rotate-180': openMenus.masterdata }"></i>
     </button>
-    <div x-show="openMenus.pengunjung" x-collapse class="pl-8 space-y-1">
-      <a href="{{ route('admin.pengunjung.index') }}" 
+
+    <div x-show="openMenus.masterdata" x-collapse class="pl-8 space-y-1">
+      <a href="{{ route('superadmin.masterdata.index') }}" 
         class="block px-4 py-2 text-sm rounded-lg transition-all
-                {{ request()->routeIs('admin.pengunjung.index') ? 
+                {{ request()->routeIs('superadmin.masterdata.index') ? 
                   'bg-orange-100 text-orange-600' : 
                   'text-gray-800 hover:bg-orange-400' }}">
         <i class="fas fa-list mr-2"></i>
-        Daftar
-      </a>
-          <a href="{{ route('admin.pengunjung.entryfoto') }}" 
-        class="block px-4 py-2 text-sm rounded-lg transition-all
-                {{ request()->routeIs('admin.pengunjung.entryfoto') ? 
-                  'bg-orange-100 text-orange-600' : 
-                  'text-gray-800 hover:bg-orange-400' }}">
-        <i class="fas fa-plus-circle mr-2"></i>
-        Tambah foto
-          </a>
-      <a href="{{ route('admin.pengunjung.laporanfoto') }}" 
-        class="block px-4 py-2 text-sm rounded-lg transition-all
-                {{ request()->routeIs('admin.pengunjung.laporanfoto') ? 
-                  'bg-orange-100 text-orange-600' : 
-                  'text-gray-800 hover:bg-orange-400' }}">
-        <i class="fas fa-chart-bar mr-2"></i>
-        Laporan foto
+        Kelola Akun
       </a>
     </div>
+
+    <div x-show="openMenus.masterdata" x-collapse class="pl-8 space-y-1">
+      <a href="{{ route('superadmin.masterdata.blcarea') }}"
+        class="block px-4 py-2 text-sm rounded-lg transition-all
+                {{ request()->routeIs('superadmin.masterdata.blcarea') ? 
+                  'bg-orange-100 text-orange-600' : 
+                  'text-gray-800 hover:bg-orange-400' }}">
+        <i class="fas fa-list mr-2"></i>
+        Blc Area
+      </a>
+    </div>
+
   </div>
 
   <!-- Menu Peserta -->
