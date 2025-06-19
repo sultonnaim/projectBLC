@@ -1,4 +1,4 @@
-<!-- Hapus dependensi gambar GD -->
+
 <div class="header">
     <h1>Jadwal Kelas BLC Surabaya</h1>
     <p>Periode: {{ now()->format('d F Y') }}</p>

@@ -22,7 +22,14 @@
                 Reset
             </a>
         </form>
+
     </div>
+        <div class="flex items-center p-4 rounded-lg mb-6">
+            <a href="{{ route('admin.pengunjung.entryfoto') }}" 
+            class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg flex items-center">
+                <i class="fas fa-plus mr-2"></i> Tambah Foto
+            </a>
+        </div>
 
     <!-- Photo Gallery with Pagination -->
     <div class="bg-white p-4 rounded-lg shadow-md">

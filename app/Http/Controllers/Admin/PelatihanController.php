@@ -17,7 +17,7 @@ class PelatihanController extends Controller
         $kelas = Kelas::query()
             ->when($search, function($query) use ($search) {
                 return $query->where('nama_kelas', 'like', '%'.$search.'%')
-                             ->orWhere('materi', 'like', '%'.$search.'%');
+                            ->orWhere('materi', 'like', '%'.$search.'%');
             })
             ->withCount('pesertas')
             ->paginate(10);

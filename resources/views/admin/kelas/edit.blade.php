@@ -67,7 +67,7 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Jam Selesai*</label>
                         <input type="time" name="jam_selesai" value="{{ old('jam_selesai', $kelas->jam_selesai) }}" required 
-                               class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
+                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
                     </div>
                     
                     <div>

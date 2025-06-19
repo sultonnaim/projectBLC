@@ -181,4 +181,27 @@ public function updateFoto(Request $request, $id)
         ->with('success', 'Foto kegiatan berhasil diperbarui');
 }
 
+
+public function laporan(Request $request)
+{
+    $query = Pengunjung::query();
+
+    if ($request->filled('start_date')) {
+        $query->whereDate('tanggal', '>=', $request->start_date);
+    }
+
+    if ($request->filled('end_date')) {
+        $query->whereDate('tanggal', '<=', $request->end_date);
+    }
+
+    $pengunjungs = $query->get();
+
+    $rekap = [
+        'siswa' => $pengunjungs->where('kategori', 'siswa')->count(),
+        'umum'  => $pengunjungs->where('kategori', 'umum')->count(),
+    ];
+
+    return view('admin.pengunjung.laporan', compact('pengunjungs', 'rekap'));
+}
+
 }

@@ -66,7 +66,7 @@
                 </div>
                             <!-- Tombol Simpan -->
             <div class="mt-8 flex justify-end">
-                <a href="{{ route('admin.pengunjung.index') }}" 
+                <a href="{{ route('admin.pengunjung.laporanfoto') }}" 
                    class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400 mr-3">
                     Batal
                 </a>

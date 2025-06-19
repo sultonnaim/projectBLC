@@ -78,6 +78,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/pengunjung/laporanfoto', [PengunjungController::class, 'showLaporanFoto'])->name('pengunjung.laporanfoto');
         Route::get('/pengunjung/updatefoto/{id}', [PengunjungController::class, 'updatefoto'])->name('pengunjung.updatefoto');
         Route::delete('/pengunjung/hapusfoto/{id}', [PengunjungController::class, 'hapusFoto'])->name('pengunjung.hapusfoto');
+        Route::get('/pengunjung/laporan', [PengunjungController::class, 'laporan'])->name('pengunjung.laporan');
 
 
 Route::prefix('pelatihan')->group(function() {

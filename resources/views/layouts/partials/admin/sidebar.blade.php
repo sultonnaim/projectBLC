@@ -60,13 +60,13 @@
             <i class="fas fa-list mr-2"></i>
             Daftar
           </a>
-              <a href="{{ route('admin.pengunjung.entryfoto') }}" 
+              {{-- <a href="{{ route('admin.pengunjung.entryfoto') }}" 
             class="block px-4 py-2 text-sm rounded-lg transition-all
                     {{ request()->routeIs('admin.pengunjung.entryfoto') ? 
                       'bg-orange-100 text-orange-600' : 
                       'text-gray-800 hover:bg-orange-400' }}">
             <i class="fas fa-plus-circle mr-2"></i>
-            Tambah foto
+            Tambah foto --}}
               </a>
           <a href="{{ route('admin.pengunjung.laporanfoto') }}" 
             class="block px-4 py-2 text-sm rounded-lg transition-all
@@ -74,7 +74,15 @@
                       'bg-orange-100 text-orange-600' : 
                       'text-gray-800 hover:bg-orange-400' }}">
             <i class="fas fa-chart-bar mr-2"></i>
-            Laporan foto
+            foto
+          </a>
+          <a href="{{ route('admin.pengunjung.laporan') }}" 
+            class="block px-4 py-2 text-sm rounded-lg transition-all
+                    {{ request()->routeIs('admin.pengunjung.laporan') ? 
+                      'bg-orange-100 text-orange-600' : 
+                      'text-gray-800 hover:bg-orange-400' }}">
+            <i class="fas fa-chart-bar mr-2"></i>
+            kegiatan
           </a>
         </div>
       </div>
