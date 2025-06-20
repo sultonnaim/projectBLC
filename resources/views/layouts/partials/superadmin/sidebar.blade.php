@@ -55,7 +55,7 @@
                 {{ request()->routeIs('superadmin.masterdata.index') ? 
                   'bg-orange-100 text-orange-600' : 
                   'text-gray-800 hover:bg-orange-400' }}">
-        <i class="fas fa-list mr-2"></i>
+        <i class="fas fa-users mr-3"></i>
         Kelola Akun
       </a>
     </div>

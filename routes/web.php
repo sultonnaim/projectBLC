@@ -138,20 +138,25 @@ Route::prefix('superadmin')->name('superadmin.')->group(function () {
     Route::prefix('masterdata')->name('masterdata.')->group(function () {
         Route::get('/lokasi', [LokasiBLCController::class, 'indexarea'])->name('blcarea');
         Route::get('/entryblc', [LokasiBLCController::class, 'create'])->name('entryblc');
-
+    
         Route::get('/lokasi/create', [LokasiBLCController::class, 'create'])->name('blc.create');
         Route::post('/lokasi', [LokasiBLCController::class, 'store'])->name('blc.store');
         Route::get('/lokasi/{blcLocation}/edit', [LokasiBLCController::class, 'edit'])->name('blc.edit');
         Route::put('/lokasi/{blcLocation}', [LokasiBLCController::class, 'update'])->name('blc.update');
         Route::delete('/lokasi/{blcLocation}', [LokasiBLCController::class, 'destroy'])->name('blc.destroy');
+        Route::get('/blc/editblc', [LokasiBLCController::class, 'editDeletePage'])
+            ->name('editblc');
+        Route::get('/formeditblc/{blcLocation}', [LokasiBLCController::class, 'edit'])
+            ->name('formeditblc');
+
     });
+    
+    
+
 
     
     
 });
-
-   
-
 
 
 });

@@ -13,9 +13,9 @@
         <p class="text-orange-600">Kelola area BLC</p>
     </div>
     <div class="flex items-center gap-3">
-        <a href="{{ route('superadmin.masterdata.entryblc') }}" 
+        <a href="{{ route('superadmin.masterdata.editblc') }}"
         class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg flex items-center">
-            <i class="fas fa-plus mr-2"></i> Tambah Area
+            <i class=""></i> Lihat Area
         </a>
     </div>
 </div>
