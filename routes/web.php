@@ -12,6 +12,8 @@ use APP\Http\Controllers\Admin\AcaraController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\SuperAdmin\LokasiBLCController;
+use App\Http\Controllers\superadmin\KategoriController;
+use App\Http\Controllers\superadmin\SesiController;
 
 
 // Halaman Publik (Tanpa Auth)
@@ -133,7 +135,6 @@ Route::prefix('superadmin')->name('superadmin.')->group(function () {
     ->name('masterdata.edituser');
 
 
-
     //Show BLC Area
     Route::prefix('masterdata')->name('masterdata.')->group(function () {
         Route::get('/lokasi', [LokasiBLCController::class, 'indexarea'])->name('blcarea');
@@ -149,6 +150,14 @@ Route::prefix('superadmin')->name('superadmin.')->group(function () {
         Route::get('/formeditblc/{blcLocation}', [LokasiBLCController::class, 'edit'])
             ->name('formeditblc');
 
+        Route::get('kategori', [KategoriController::class, 'index'])->name('kategori.index');
+        Route::post('kategori', [KategoriController::class, 'store'])->name('kategori.store');
+        Route::put('kategori/{kategori}', [KategoriController::class, 'update'])->name('kategori.update');
+        Route::delete('kategori/{kategori}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
+
+        Route::post('sesi', [SesiController::class, 'store'])->name('sesi.store');
+        Route::put('sesi/{sesi}', [SesiController::class, 'update'])->name('sesi.update');
+        Route::delete('sesi/{sesi}', [SesiController::class, 'destroy'])->name('sesi.destroy');
     });
     
     
