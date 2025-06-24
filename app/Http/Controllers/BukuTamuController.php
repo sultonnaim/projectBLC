@@ -22,18 +22,18 @@ class BukuTamuController extends Controller
     {
         $validated = $request->validate([
             'nama_lengkap'    => 'required|string|max:255',
-            'sesi_id'         => 'required|exists:sesis,id',
-            'kategori_id'     => 'required|exists:kategoris,id',
+            'sesi_id'         => 'required|exists:sesi,id',
+            'kategori_id'     => 'required|exists:kategori,id',
             'jenis_kelamin'   => 'required|in:L,P',
             'tanggal_lahir'   => 'required|date',
             'alamat'          => 'required|string',
             'no_telp'         => 'nullable|string|max:20',
         ]);
-
-        $validated['tanggal'] = Carbon::today();
-
+    
+        $validated['tanggal'] = now()->toDateString();
+    
         Pengunjung::create($validated);
-
+    
         return redirect()->back()->with('success', 'Terima kasih telah mengisi buku tamu!');
-    }
+    }    
 }

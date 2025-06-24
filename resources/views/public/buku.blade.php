@@ -37,7 +37,7 @@
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label for="sesi" class="block text-gray-700 mb-2">Sesi Kunjungan<span class="text-red-500">*</span></label>
-                        <select name="sesi" id="sesi" 
+                        <select name="sesi_id" required> 
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" 
                             required>
                             <option value="">Pilih Sesi</option>
@@ -49,7 +49,7 @@
                     
                     <div>
                         <label for="kategori" class="block text-gray-700 mb-2">Kategori<span class="text-red-500">*</span></label>
-                        <select name="kategori" id="kategori" 
+                        <select name="kategori_id" required> 
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" 
                             required>
                         <option value="">Pilih Kategori</option>
