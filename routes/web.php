@@ -11,6 +11,9 @@ use App\Http\Controllers\Admin\PesertaController;
 use APP\Http\Controllers\Admin\SosialisasiController;
 use APP\Http\Controllers\Admin\AcaraController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SuperAdminController;
+use App\Http\Controllers\SuperAdmin\LokasiBLCController;
+
 
 // Halaman Publik (Tanpa Auth)
 Route::view('/', 'public.home')->name('home');
@@ -27,16 +30,13 @@ Route::prefix('informasi')->group(function () {
 // Halaman Lain Publik
 Route::view('/artikel', 'public.artikel')->name('artikel');
 Route::view('/lokasi', 'public.lokasi')->name('lokasi');
+Route::view('/buku', 'public.buku')->name('buku');
+Route::get('/buku', [BukuTamuController::class, 'create'])->name('bukutamu.create');
+Route::post('/buku', [BukuTamuController::class, 'store'])->name('bukutamu.store');
 
 // Area Terproteksi (Harus Login)
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/buku', function () {
-        return view('public.buku');
-    })->name('buku');
-
-    Route::get('/buku', [BukuTamuController::class, 'create'])->name('bukutamu.create');
-    Route::post('/buku', [BukuTamuController::class, 'store'])->name('bukutamu.store');
-
+    
     // Admin Area
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/', function () {
@@ -100,11 +100,49 @@ Route::prefix('pelatihan')->group(function() {
     });
     
     // Super Admin Area
-    Route::prefix('superadmin')->name('superadmin.')->group(function () {
-        Route::get('/dashboard', function () {
-            return view('superadmin.dashboard');
-        })->name('dashboard');
+Route::prefix('superadmin')->name('superadmin.')->group(function () {
+    Route::get('/', function () {
+        return view('superadmin.dashboardsuperadmin');
+    })->name('dashboardsuperadmin');
+
+    Route::get('/profile', function () {
+        return view('superadmin.profile.profile');
+    })->name('profile');
+
+    // Show User
+    Route::get('/masterdata', [\App\Http\Controllers\SuperAdmin\UserController::class, 'index'])->name('masterdata.index');
+    Route::get('/users', [\App\Http\Controllers\SuperAdmin\UserController::class, 'index'])->name('users.index');
+    Route::post('/users', [\App\Http\Controllers\SuperAdmin\UserController::class, 'store'])->name('users.store');
+    Route::get('/masterdata/entryuser', [\App\Http\Controllers\SuperAdmin\UserController::class, 'create'])
+    ->name('masterdata.entryuser');
+
+    // User Control
+    Route::resource('users', \App\Http\Controllers\Superadmin\UserController::class);
+    Route::get('/masterdata/edituser/{user}', [\App\Http\Controllers\SuperAdmin\UserController::class, 'edit'])
+    ->name('masterdata.edituser');
+
+
+
+    //Show BLC Area
+    Route::prefix('masterdata')->name('masterdata.')->group(function () {
+        Route::get('/lokasi', [LokasiBLCController::class, 'indexarea'])->name('blcarea');
+        Route::get('/entryblc', [LokasiBLCController::class, 'create'])->name('entryblc');
+
+        Route::get('/lokasi/create', [LokasiBLCController::class, 'create'])->name('blc.create');
+        Route::post('/lokasi', [LokasiBLCController::class, 'store'])->name('blc.store');
+        Route::get('/lokasi/{blcLocation}/edit', [LokasiBLCController::class, 'edit'])->name('blc.edit');
+        Route::put('/lokasi/{blcLocation}', [LokasiBLCController::class, 'update'])->name('blc.update');
+        Route::delete('/lokasi/{blcLocation}', [LokasiBLCController::class, 'destroy'])->name('blc.destroy');
     });
+
+    
+    
+});
+
+   
+
+
+
 });
 
 require __DIR__.'/auth.php';
