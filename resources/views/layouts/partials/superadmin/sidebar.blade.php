@@ -55,7 +55,7 @@
                 {{ request()->routeIs('superadmin.masterdata.index') ? 
                   'bg-orange-100 text-orange-600' : 
                   'text-gray-800 hover:bg-orange-400' }}">
-        <i class="fas fa-list mr-2"></i>
+        <i class="fas fa-users mr-3"></i>
         Kelola Akun
       </a>
     </div>
@@ -71,42 +71,20 @@
       </a>
     </div>
 
-  </div>
+    <div x-show="openMenus.masterdata" x-collapse class="pl-8 space-y-1">
+  <a href="{{ route('superadmin.masterdata.kategori.index') }}"
+     class="block px-4 py-2 text-sm rounded-lg transition-all
+            {{ request()->routeIs('superadmin.masterdata.kategori.index') ? 
+              'bg-orange-100 text-orange-600' : 
+              'text-gray-800 hover:bg-orange-400' }}">
+    <i class="fas fa-list mr-2"></i>
+    Kategori dan Sesi
+  </a>
+</div>
 
-  <!-- Menu Peserta -->
-  <div class="space-y-1">
-    <button @click="openMenus.peserta = !openMenus.peserta" 
-            class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-all
-                  {{ request()->routeIs('admin.peserta.*') ? 
-                    'bg-orange-100 text-orange-600' : 
-                    'text-gray-800 hover:bg-orange-500' }}">
-      <span class="flex items-center">
-        <i class="fas fa-users mr-3"></i>
-        Peserta
-      </span>
-      <i class="fas fa-chevron-down text-xs transition-transform duration-200" 
-        :class="{ 'rotate-180': openMenus.peserta }"></i>
-    </button>
-    
-    <div x-show="openMenus.peserta" x-collapse class="pl-8 space-y-1">
-      <a href="{{ route('admin.peserta.index') }}" 
-        class="block px-4 py-2 text-sm rounded-lg transition-all
-              {{ request()->routeIs('admin.peserta.index') ? 
-                'bg-orange-100 text-orange-600' : 
-                'text-gray-800 hover:bg-orange-400' }}">
-        <i class="fas fa-list mr-2"></i>
-        Daftar Peserta
-      </a>
-      <a href="{{ route('admin.peserta.create') }}" 
-        class="block px-4 py-2 text-sm rounded-lg transition-all
-              {{ request()->routeIs('admin.peserta.create') ? 
-                'bg-orange-100 text-orange-600' : 
-                'text-gray-800 hover:bg-orange-400' }}">
-        <i class="fas fa-plus-circle mr-2"></i>
-        Tambah Peserta
-      </a>
-    </div>
+
   </div>
+        
 
   <!-- Menu Kelas -->
   <div class="space-y-1">

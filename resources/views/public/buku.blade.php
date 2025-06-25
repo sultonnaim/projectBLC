@@ -37,29 +37,27 @@
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label for="sesi" class="block text-gray-700 mb-2">Sesi Kunjungan<span class="text-red-500">*</span></label>
-                        <select name="sesi" id="sesi" 
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" 
-                                required>
+                        <select name="sesi_id" required> 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" 
+                            required>
                             <option value="">Pilih Sesi</option>
-                            <option value="1">Sesi 1 (08.00-10.00)</option>
-                            <option value="2">Sesi 2 (10.00-12.00)</option>
-                            <option value="3">Sesi 3 (13.00-15.00)</option>
-                            <option value="4">Sesi 4 (15.00-17.00)</option>
-                            <option value="5">Sesi 5 (17.00-19.00)</option>
+                            @foreach($sesis as $sesi)
+                                <option value="{{ $sesi->id }}">{{ $sesi->nama }} ({{ $sesi->jam }})</option>
+                            @endforeach
                         </select>
                     </div>
                     
                     <div>
                         <label for="kategori" class="block text-gray-700 mb-2">Kategori<span class="text-red-500">*</span></label>
-                        <select name="kategori" id="kategori" 
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" 
-                                required>
-                            <option value="">Pilih Kategori</option>
-                            <option value="sd">SD</option>
-                            <option value="smp">SMP</option>
-                            <option value="sma">SMA</option>
-                            <option value="umum">Umum</option>
-                        </select>
+                        <select name="kategori_id" required> 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" 
+                            required>
+                        <option value="">Pilih Kategori</option>
+                        @foreach($kategoris as $kategori)
+                            <option value="{{ $kategori->id }}">{{ $kategori->nama }}</option>
+                        @endforeach
+                    </select>
+
                     </div>
                 </div>
 

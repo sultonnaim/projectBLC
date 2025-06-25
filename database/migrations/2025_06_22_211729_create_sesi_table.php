@@ -9,16 +9,20 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('lokasiblc', function (Blueprint $table) {
+        Schema::create('sesi', function (Blueprint $table) {
             $table->id();
-            $table->string('wilayah');
-            $table->string('area');
-            $table->text('link_maps');
+            $table->string('nama');
+            $table->time('jam');
             $table->timestamps();
         });
-        
     }
-
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('sesi');
+    }
 };

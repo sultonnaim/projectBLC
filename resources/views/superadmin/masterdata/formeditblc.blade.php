@@ -7,7 +7,7 @@
     <h1 class="text-xl font-bold mb-4 text-gray-800">
         {{ isset($blcLocation) ? 'Form Edit Lokasi BLC' : 'Form Tambah Lokasi BLC' }}
     </h1>
-
+    
     <form 
         action="{{ isset($blcLocation) 
                     ? route('superadmin.masterdata.blc.update', $blcLocation->id) 
@@ -20,12 +20,9 @@
             @method('PUT')
         @endif
 
-        {{-- Wilayah --}}
         <div>
             <label for="wilayah" class="block font-medium">Wilayah</label>
-            <select name="wilayah" id="wilayah"
-                class="w-full px-4 py-2 border rounded-lg"
-                required>
+            <select name="wilayah" id="wilayah" class="w-full px-4 py-2 border rounded-lg" required>
                 <option value="">-- Pilih Wilayah --</option>
                 @php
                     $wilayahList = ['Surabaya Utara', 'Surabaya Barat', 'Surabaya Timur', 'Surabaya Selatan', 'Surabaya Pusat'];
@@ -39,7 +36,6 @@
             </select>
         </div>
 
-        {{-- Area --}}
         <div>
             <label for="area" class="block font-medium">Nama Area BLC</label>
             <input type="text" name="area" id="area" 
@@ -47,7 +43,6 @@
                 value="{{ old('area', $blcLocation->area ?? '') }}" required>
         </div>
 
-        {{-- Link Maps --}}
         <div>
             <label for="link_maps" class="block font-medium">Link Google Maps</label>
             <input type="url" name="link_maps" id="link_maps" 
@@ -58,7 +53,6 @@
         <div class="flex justify-between items-center">
             <a href="{{ route('superadmin.masterdata.editblc') }}" 
                class="text-gray-600 hover:underline">← Kembali</a>
-        
 
         <div class="text-right">
             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">
