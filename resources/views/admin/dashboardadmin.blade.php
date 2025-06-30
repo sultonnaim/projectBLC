@@ -27,11 +27,6 @@
         </a>
     </div>
 
-    <!-- Calendar Controls -->
-    <div class="bg-white p-4 rounded-lg shadow-md mb-6">
-        <!-- Kontrol kalender  -->
-    </div>
-
     <!-- Google Calendar Embed -->
     <div class="bg-white rounded-xl shadow-md overflow-hidden">
         <div class="h-[700px]">
