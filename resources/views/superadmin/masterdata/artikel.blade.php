@@ -12,6 +12,16 @@
         </div>
     @endif
 
+    <form method="GET" action="{{ route('superadmin.masterdata.artikel.index') }}" class="mb-6 flex gap-2">
+    <input type="text" name="search" value="{{ request('search') }}"
+           class="border border-gray-300 rounded px-4 py-2 w-full md:w-1/3"
+           placeholder="Cari judul artikel...">
+
+    <button type="submit" class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">
+        Cari
+    </button>
+</form>
+
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         @foreach($articles as $artikel)
             <div class="bg-white rounded shadow p-4">

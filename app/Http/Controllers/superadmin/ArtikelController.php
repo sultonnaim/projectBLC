@@ -9,11 +9,18 @@ use Illuminate\Support\Facades\Storage;
 
 class ArtikelController extends Controller
 {
-    public function index()
-    {
-        $articles = Artikel::latest()->paginate(6);
-        return view('superadmin.masterdata.artikel', compact('articles'));
+    public function index(Request $request)
+{
+    $query = Artikel::query();
+
+    if ($request->filled('search')) {
+        $query->where('title', 'like', '%' . $request->search . '%');
     }
+
+    $articles = $query->latest()->paginate(6);
+    return view('superadmin.masterdata.artikel', compact('articles'));
+}
+
 
     public function create()
     {
