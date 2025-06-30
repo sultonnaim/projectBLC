@@ -72,15 +72,26 @@
     </div>
 
     <div x-show="openMenus.masterdata" x-collapse class="pl-8 space-y-1">
-  <a href="{{ route('superadmin.masterdata.kategori.index') }}"
-     class="block px-4 py-2 text-sm rounded-lg transition-all
-            {{ request()->routeIs('superadmin.masterdata.kategori.index') ? 
+      <a href="{{ route('superadmin.masterdata.kategori.index') }}"
+        class="block px-4 py-2 text-sm rounded-lg transition-all
+                {{ request()->routeIs('superadmin.masterdata.kategori.index') ? 
+                  'bg-orange-100 text-orange-600' : 
+                  'text-gray-800 hover:bg-orange-400' }}">
+        <i class="fas fa-list mr-2"></i>
+        Kategori dan Sesi
+      </a>
+    </div>
+
+    <div x-show="openMenus.masterdata" x-collapse class="pl-8 space-y-1">
+      <a href="{{ route('superadmin.masterdata.artikel.index') }}"
+        class="block px-4 py-2 text-sm rounded-lg transition-all
+            {{ request()->routeIs('superadmin.masterdata.artikel.index') ? 
               'bg-orange-100 text-orange-600' : 
               'text-gray-800 hover:bg-orange-400' }}">
-    <i class="fas fa-list mr-2"></i>
-    Kategori dan Sesi
-  </a>
-</div>
+        <i class="fas fa-list mr-2"></i>
+        Kelola Artikel
+      </a>
+    </div>
 
 
   </div>
