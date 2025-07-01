@@ -16,6 +16,8 @@ use App\Http\Controllers\SuperAdmin\LokasiBLCController;
 use App\Http\Controllers\superadmin\KategoriController;
 use App\Http\Controllers\superadmin\SesiController;
 use App\Http\Controllers\superadmin\ArtikelController;
+use App\Http\Controllers\PublicArtikelController;
+use App\Http\Controllers\PublicSesiController;
 
 // Halaman Publik (Tanpa Auth)
 Route::view('/', 'public.home')->name('home');
@@ -26,11 +28,13 @@ Route::prefix('informasi')->group(function () {
     Route::view('/maklumat', 'public.informasi.maklumat')->name('informasi.maklumat');
     Route::view('/pendaftaran', 'public.informasi.pendaftaran')->name('informasi.pendaftaran');
     Route::view('/pembelajaran', 'public.informasi.pembelajaran')->name('informasi.pembelajaran');
+    Route::get('/jadwal', [PublicArtikelController::class, 'jadwalPelatihan'])->name('jadwal.pelatihan');
     Route::view('/faq', 'public.informasi.faq')->name('informasi.faq');
 });
 
 // Halaman Lain Publik
-Route::view('/artikel', 'public.artikel')->name('artikel');
+Route::get('/artikel', [PublicArtikelController::class, 'index'])->name('artikel.index');
+Route::get('/artikel/{id}', [PublicArtikelController::class, 'show'])->name('artikel.show');
 Route::view('/lokasi', 'public.lokasi')->name('lokasi');
 Route::view('/buku', 'public.buku')->name('buku');
 Route::get('/buku', [BukuTamuController::class, 'create'])->name('bukutamu.create');

@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artikel - BLC Surabaya</title>
+    <title>{{ $article->title ?? 'BLC Surabaya' }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <style>
+        .artikel-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+        }
+    </style>
 </head>
 <body class="bg-gray-100 text-gray-900">
     <header class="sticky top-0 z-50 bg-white shadow-md py-6">
@@ -36,28 +45,35 @@
         </div>
     </header>
 
-    {{-- Artikel Section --}}
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-orange-500 text-center mb-10">Artikel Terbaru</h2>
+    {{-- Halaman Detail Artikel --}}
+    <main>
+        <div class="container mx-auto px-4 py-16 max-w-4xl">
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                @foreach ($articles as $article)
-                    <div class="bg-gray-50 rounded-xl shadow hover:shadow-lg p-6 transition">
-                        <img src="{{ asset('storage/' . $article->thumbnail) }}" alt="{{ $article->title }}" class="w-full h-40 object-cover rounded-md mb-4">
-                        <h3 class="text-xl font-semibold text-orange-500 mb-2">{{ $article->title }}</h3>
-                        <p class="text-gray-600 mb-4">{{ \Illuminate\Support\Str::limit(strip_tags($article->content), 100) }}</p>
-                        <a href="{{ route('artikel.show', $article->id) }}" class="text-orange-500 hover:underline font-semibold">Baca Selengkapnya →</a>
-                    </div>
-                @endforeach
+            {{-- Judul --}}
+            <h1 class="text-4xl font-bold text-orange-500 mb-6 text-center">
+                {{ $article->title }}
+            </h1>
+
+            {{-- Thumbnail --}}
+            <img 
+                src="{{ asset('storage/' . $article->thumbnail) }}" 
+                alt="{{ $article->title }}" 
+                class="w-full max-h-[300px] md:max-h-[400px] lg:max-h-[500px] object-contain bg-white rounded-md mx-auto mb-8"
+            >
+
+            {{-- Konten Artikel --}}
+            <div class="artikel-content text-gray-800 leading-relaxed space-y-4">
+                {!! $article->content !!}
             </div>
 
-            {{-- Pagination --}}
-            <div class="mt-10 flex justify-center">
-                {{ $articles->links() }}
+            {{-- Tombol Kembali --}}
+            <div class="mt-8 text-center">
+                <a href="{{ route('artikel.index') }}" class="inline-block text-orange-500 hover:underline text-base">
+                    ← Kembali ke Daftar Artikel
+                </a>
             </div>
         </div>
-    </section>
+    </main>
 
     {{-- Footer --}}
     <footer class="bg-orange-400 mt-8 py-6">

@@ -108,11 +108,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td class="px-4 py-2 border">1</td><td class="px-4 py-2 border">07.30 - 09.00 WIB (Senin - Jumat)</td></tr>
-                            <tr><td class="px-4 py-2 border">2</td><td class="px-4 py-2 border">09.00 - 10.30 WIB (Senin - Jumat)</td></tr>
-                            <tr><td class="px-4 py-2 border">3</td><td class="px-4 py-2 border">10.30 - 12.00 WIB (Senin - Jumat)</td></tr>
-                            <tr><td class="px-4 py-2 border">4</td><td class="px-4 py-2 border">13.00 - 14.30 WIB (Senin - Jumat)</td></tr>
-                            <tr><td class="px-4 py-2 border">5</td><td class="px-4 py-2 border">14.30 - 16.00 WIB (Senin - Jumat)</td></tr>
+                            <tr><td class="px-4 py-2 border">1</td><td class="px-4 py-2 border">07.30 - 09.00 WIB </td></tr>
+                            <tr><td class="px-4 py-2 border">2</td><td class="px-4 py-2 border">09.00 - 10.30 WIB </td></tr>
+                            <tr><td class="px-4 py-2 border">3</td><td class="px-4 py-2 border">10.30 - 12.00 WIB </td></tr>
+                            <tr><td class="px-4 py-2 border">4</td><td class="px-4 py-2 border">13.00 - 14.30 WIB </td></tr>
+                            <tr><td class="px-4 py-2 border">5</td><td class="px-4 py-2 border">14.30 - 16.00 WIB </td></tr>
                         </tbody>
                     </table>
                 </div>
