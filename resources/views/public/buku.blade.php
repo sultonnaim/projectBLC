@@ -41,9 +41,9 @@
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" 
                             required>
                             <option value="">Pilih Sesi</option>
-                            @foreach($sesis as $sesi)
+                            {{-- @foreach($sesis as $sesi)
                                 <option value="{{ $sesi->id }}">{{ $sesi->nama }} ({{ $sesi->jam }})</option>
-                            @endforeach
+                            @endforeach --}}
                         </select>
                     </div>
                     
@@ -53,9 +53,9 @@
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" 
                             required>
                         <option value="">Pilih Kategori</option>
-                        @foreach($kategoris as $kategori)
+                        {{-- @foreach($kategoris as $kategori)
                             <option value="{{ $kategori->id }}">{{ $kategori->nama }}</option>
-                        @endforeach
+                        @endforeach --}}
                     </select>
 
                     </div>
