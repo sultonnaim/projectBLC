@@ -16,6 +16,7 @@ use App\Http\Controllers\SuperAdmin\LokasiBLCController;
 use App\Http\Controllers\superadmin\KategoriController;
 use App\Http\Controllers\superadmin\SesiController;
 use App\Http\Controllers\superadmin\ArtikelController;
+use App\Http\Controllers\superadmin\dashboardController;
 use App\Http\Controllers\PublicArtikelController;
 use App\Http\Controllers\PublicSesiController;
 
@@ -36,6 +37,7 @@ Route::prefix('informasi')->group(function () {
 Route::get('/artikel', [PublicArtikelController::class, 'index'])->name('artikel.index');
 Route::get('/artikel/{id}', [PublicArtikelController::class, 'show'])->name('artikel.show');
 Route::view('/lokasi', 'public.lokasi')->name('lokasi');
+Route::view('/kontak', 'public.kontak')->name('kontak');
 Route::view('/buku', 'public.buku')->name('buku');
 Route::get('/buku', [BukuTamuController::class, 'create'])->name('bukutamu.create');
 Route::post('/buku', [BukuTamuController::class, 'store'])->name('bukutamu.store');
@@ -107,9 +109,7 @@ Route::prefix('pelatihan')->group(function() {
     
     // Super Admin Area
 Route::prefix('superadmin')->name('superadmin.')->group(function () {
-    Route::get('/', function () {
-        return view('superadmin.dashboardsuperadmin');
-    })->name('dashboardsuperadmin');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboardsuperadmin');
 
     Route::get('/profile', function () {
         return view('superadmin.profile.profile');

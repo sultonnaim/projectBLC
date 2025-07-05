@@ -30,6 +30,7 @@
                     </li>
                     <li><a href="#lokasi" class="px-2 py-2 hover:text-orange-400">Lokasi</a></li>
                     <li><a href="/artikel" class="px-2 py-2 hover:text-orange-400">Artikel</a></li>
+                    <li><a href="/kontak" class="px-2 py-2 hover:text-orange-400">Kontak</a></li>
                     <li><a href="/buku" class="px-4 py-1 rounded-xl font-semibold text-white bg-orange-400 hover:bg-orange-700 transition inline-flex items-center justify-center h-full shadow-md"> Buku Tamu</a></li>
                 </ul>
             </nav>
@@ -37,7 +38,7 @@
     </header>
 
     {{-- Artikel Section --}}
-    <section class="py-16 bg-white">
+    <section class="py-16 bg-grey">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-orange-500 text-center mb-10">Artikel Terbaru</h2>
 

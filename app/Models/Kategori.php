@@ -11,5 +11,10 @@ class Kategori extends Model
 
     protected $table = 'kategori';
     protected $fillable = ['nama'];
+
+    public function pengunjung()
+{
+    return $this->hasMany(\App\Models\Pengunjung::class, 'kategori_id');
+}
 }
 
