@@ -36,6 +36,7 @@
                         <th class="px-4 py-3 text-left text-xs font-medium text-gray-600 uppercase">Wilayah</th>
                         <th class="px-4 py-3 text-left text-xs font-medium text-gray-600 uppercase">Area</th>
                         <th class="px-4 py-3 text-left text-xs font-medium text-gray-600 uppercase">Link Maps</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-600 uppercase">Foto</th>
                         <th class="px-4 py-3 text-left text-xs font-medium text-gray-600 uppercase">Aksi</th>
                     </tr>
                 </thead>
@@ -46,7 +47,14 @@
                         <td class="px-4 py-3 text-sm text-gray-800">{{ $blc->wilayah ?? '-' }}</td>
                         <td class="px-4 py-3 text-sm text-gray-800">{{ $blc->name ?? '-' }}</td>
                         <td class="px-4 py-3 text-sm text-blue-600">
-                            <a href="{{ $blc->url }}" target="_blank" class="hover:underline">Lihat Maps</a>
+                            <a href="{{ $blc->link_maps }}" target="_blank" class="hover:underline">Lihat Maps</a>
+                        </td>
+                        <td class="px-4 py-3 text-sm">
+                            @if($blc->foto)
+                                <img src="{{ asset('storage/' . $blc->foto) }}" alt="Foto" class="w-20 h-auto rounded shadow">
+                            @else
+                                <span class="text-gray-400 italic">Tidak ada</span>
+                            @endif
                         </td>
                         <td class="px-4 py-3 text-sm">
                             <div class="flex gap-2">
@@ -69,7 +77,7 @@
 
                     @if($blcLocations->isEmpty())
                         <tr>
-                            <td colspan="5" class="px-4 py-3 text-center text-gray-500">Belum ada lokasi BLC terdaftar.</td>
+                            <td colspan="6" class="px-4 py-3 text-center text-gray-500">Belum ada lokasi BLC terdaftar.</td>
                         </tr>
                     @endif
                 </tbody>

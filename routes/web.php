@@ -19,6 +19,7 @@ use App\Http\Controllers\superadmin\ArtikelController;
 use App\Http\Controllers\superadmin\dashboardController;
 use App\Http\Controllers\PublicArtikelController;
 use App\Http\Controllers\PublicSesiController;
+use App\Http\Controllers\LokasiController;
 
 // Halaman Publik (Tanpa Auth)
 Route::view('/', 'public.home')->name('home');
@@ -37,6 +38,7 @@ Route::prefix('informasi')->group(function () {
 Route::get('/artikel', [PublicArtikelController::class, 'index'])->name('artikel.index');
 Route::get('/artikel/{id}', [PublicArtikelController::class, 'show'])->name('artikel.show');
 Route::view('/lokasi', 'public.lokasi')->name('lokasi');
+Route::get('/lokasi', [LokasiController::class, 'index'])->name('lokasi.index');
 Route::view('/kontak', 'public.kontak')->name('kontak');
 Route::view('/buku', 'public.buku')->name('buku');
 Route::get('/buku', [BukuTamuController::class, 'create'])->name('bukutamu.create');

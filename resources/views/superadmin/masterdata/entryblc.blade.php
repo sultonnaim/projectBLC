@@ -13,6 +13,7 @@
                     ? route('superadmin.masterdata.blc.update', $blcLocation->id) 
                     : route('superadmin.masterdata.blc.store') }}" 
         method="POST" 
+        enctype="multipart/form-data"
         class="space-y-4 bg-white p-6 rounded-lg shadow-md w-full"
     >
         @csrf
@@ -55,17 +56,31 @@
                 value="{{ old('link_maps', $blcLocation->link_maps ?? '') }}" required>
         </div>
 
+        {{-- Foto --}}
+        <div>
+            <label for="foto" class="block font-medium">Foto Lokasi BLC</label>
+            <input type="file" name="foto" id="foto" 
+                accept="image/*"
+                class="w-full px-4 py-2 border rounded-lg">
+
+            @if(isset($blcLocation) && $blcLocation->foto)
+                <div class="mt-2">
+                    <p class="text-sm text-gray-600 mb-1">Foto saat ini:</p>
+                    <img src="{{ asset('storage/' . $blcLocation->foto) }}" alt="Foto BLC" class="w-48 h-auto rounded shadow">
+                </div>
+            @endif
+        </div>
+
         <div class="flex justify-between items-center">
             <a href="{{ route('superadmin.masterdata.editblc') }}" 
                class="text-gray-600 hover:underline">← Kembali</a>
-        
 
-        <div class="text-right">
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">
-                {{ isset($blcLocation) ? 'Update Lokasi' : 'Simpan Lokasi' }}
-            </button>
+            <div class="text-right">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">
+                    {{ isset($blcLocation) ? 'Update Lokasi' : 'Simpan Lokasi' }}
+                </button>
+            </div>
         </div>
     </form>
-
 </div>
 @endsection
